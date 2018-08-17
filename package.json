@@ -1,0 +1,23 @@
+{
+  "name": "groupproject2",
+  "version": "1.0.0",
+  "description": "Bootcamp Group Project #2",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soltis13/GroupProject2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Soltis13/GroupProject2/issues"
+  },
+  "homepage": "https://github.com/Soltis13/GroupProject2#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mysql": "^2.16.0"
+  }
+}
