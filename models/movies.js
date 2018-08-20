@@ -1,0 +1,46 @@
+module.exports = function (sequelize, DataTypes) {
+    var Movie = sequelize.define("Movie", {
+        movieEdition: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        mediaType: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        loanStatus: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+
+        comments: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        condition: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+
+            }
+        },
+    });
+    Movie.belongsTo(User)
+
+
+
+    return Movie;
+};
