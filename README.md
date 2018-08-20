@@ -1,11 +1,9 @@
 # Project Requirements
-<<<<<<< HEAD
 I MADE THIS CHANGE. I AM JOE.
 =======
 
 I made a change to this to ssee if we can get Travis to work
 
->>>>>>> 485af877d59315e400849601622bd471cb4ba6e8
 This document outlines the base requirements for Project 2.
 
 ### Requirements
