@@ -9,16 +9,26 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    // db.Example.create(req.body).then(function(dbExample) {
-    //   res.json(dbExample);
-    // });
+  //began working on a POST for a user
+  app.post("/api/user", function(req, res) {
+    db.User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      address: req.body.address,
+      city: req.body.city,
+      state: req.body.state,
+      zip: req.body.zip
+    }).then(function(dbExample) {
+      res.json(dbExample);
+    });
   });
 
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
-  //   db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-  //     res.json(dbExample);
-  //   });
-  // });
+    db.Example.destroy({ where: { id: req.params.id } }).then(function() {
+      res.json(dbExample);
+    });
+  });
 };
