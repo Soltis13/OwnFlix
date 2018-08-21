@@ -97,8 +97,8 @@ $('#submit-new-user').on('click', function(e) {
     },
     // Specify validation error messages
     messages: {
-      firstname: "Please enter your firstname",
-      lastname: "Please enter your lastname",
+      firstName: "Please enter your firstname",
+      lastName: "Please enter your lastname",
       password: {
         required: "Please provide a password",
         minlength: "Your password must be at least 8 characters long"
@@ -122,7 +122,19 @@ $('#submit-new-user').on('click', function(e) {
     // Make sure the form is submitted to the destination defined
     // in the "action" attribute of the form when valid
     submitHandler: function(form) {
+
+      // Serialize form data
+      let serialForm = $(form).serializeArray();
+      let data = {};
+      for (let i = 0; i < serialForm.length; i++){
+        data[serialForm[i]['name']] = serialForm[i]['value'];
+      }
+      console.log(data);
       console.log("valid form");
+
+      $.post('/api/user', data, function(r) {
+        console.log("Woo posted");
+      })
     }
   });
 });
