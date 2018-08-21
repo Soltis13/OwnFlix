@@ -20,5 +20,9 @@ module.exports = function(app) {
   //   db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
   //     res.json(dbExample);
   //   });
+<<<<<<< HEAD
   });
+=======
+  // });
+>>>>>>> 60a9c8d47a270681e39216e8b6b2322d30f5277a
 };
