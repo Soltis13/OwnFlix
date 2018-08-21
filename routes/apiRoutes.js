@@ -24,5 +24,8 @@ module.exports = function(app) {
   });
 =======
   // });
+<<<<<<< HEAD
 >>>>>>> 60a9c8d47a270681e39216e8b6b2322d30f5277a
+=======
+>>>>>>> cb81a1af7f0debd1e49de44f91d2186d8f43e47d
 };

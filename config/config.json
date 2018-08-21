@@ -2,7 +2,11 @@
   "development": {
     "username": "root",
     "password": "root",
+<<<<<<< HEAD
     "database": "testdb",
+=======
+    "database": "Ownflix",
+>>>>>>> cb81a1af7f0debd1e49de44f91d2186d8f43e47d
     "host": "localhost",
     "dialect": "mysql"
   },
