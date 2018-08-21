@@ -1,42 +1,36 @@
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define("User", {
-    firstName: {
+  var Transaction = sequelize.define("Transaction", {
+    lenderId: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    lastName: {
+    lendeeId: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
+    // TODO: create foreign key for Movie ID
 
-    password: {
+    checkoutDate: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    address: {
+    returnDate: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    city: {
+    transactionId: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -49,15 +43,8 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [1]
       }
-    },
-    zip: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
     }
   });
 
-  return User;
+  return Transaction;
 };

@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "Ownflix",
+    "database": "testdb",
     "host": "localhost",
     "dialect": "mysql"
   },
