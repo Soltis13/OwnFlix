@@ -1,10 +1,11 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "exampledb",
+    "password": "root",
+    "database": "ownflix",
     "host": "localhost",
     "dialect": "mysql"
+
   },
   "test": {
     "username": "root",
