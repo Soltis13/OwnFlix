@@ -2,13 +2,10 @@
   "development": {
     "username": "root",
     "password": "root",
-<<<<<<< HEAD
     "database": "ownflix",
-=======
-    "database": "testdb",
->>>>>>> 9cd9c9f747a2c9b878b082dd26cfc9b46ad5d26a
     "host": "localhost",
     "dialect": "mysql"
+
   },
   "test": {
     "username": "root",
