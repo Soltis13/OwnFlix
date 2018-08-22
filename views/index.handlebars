@@ -44,5 +44,71 @@
               </div>
           </div>
       </div>
+      
+          <!-- New User Modal Content -->
+        <div id='new-user-modal' class='modal'>
+
+          <div class='row' id='modal-content'>
+            <div class='col-sm-3'></div>
+             <div class='col-sm-6 sign-in-form'>
+               <span class="close">&times;</span>
+                <h3>Create Account</h3>
+                <form id='create-account-form' name='new-user-form'>
+                <br><label for="firstName">First Name</label><input name='firstName' type='text' id='firstName'>
+                <br>
+                <br>
+                <label for="lastName">Last Name</label><input name='lastName' type='text' id='lastName'>
+                <br>
+                <br>
+                <label for="email">Email</label><input type='text' id='email' name='email'>
+                <br>
+                <br>
+                <label for="address">Address</label><input type='text' id='address' name='address'>
+                <br>
+                <br>
+                <label for="city">City</label><input type='text' id='city' name='city'>
+                <br>
+                <br>
+                <label for="state">State (XX)</label><input type='text' id='state' name='state'>
+                <br>
+                <br>
+                <label for="zip">Zip Code (XXXXX)</label><input type='text' id='zip' name='zip'>
+                <br>
+                <br>
+                <label for="password">Password</label><input type='password' id='password' name='password'>
+                <br>
+                <br>
+                <input type='submit' id='submit-new-user' value='Submit'>
+              </form>
+             </div>
+             <div class='col-sm-3'></div>
+          </div>
+        </div>
+
+        <!-- Sign In Modal -->
+        <div id='sign-in-modal' class='modal'>
+
+          <div class='row' id='modal-content'>
+            <div class='col-sm-4'></div>
+            <div class='col-sm-4 sign-in-form'>
+              <span class="close">&times;</span>
+               <h3>Sign In</h3>
+               <br>
+               <form id='sign-in-form'>
+               <input type='text' id='user-email' placeholder='Email'>
+               <br>
+               <br>
+               <input type='password' id='user-password' placeholder='Password'>
+               <br>
+               <br>
+               <input type='submit' id='submit-sign-in' href='UserPage.html' value='Submit'>
+             </form>
+               <br>
+               <br>
+               <button id='new-user'>New? Sign up Now.</button>
+               <div class='col-sm-4'></div>
+            </div>
+        </div>
+      </div>
 
 
