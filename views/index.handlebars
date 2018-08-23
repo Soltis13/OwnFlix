@@ -23,6 +23,12 @@
               <!--containers get put here-->
               <div id="login-view">
                   <H1>See What's Next</H1>
+                  <h1>{{title}}</h1>
+                  {{#if errors}}
+                    {{#each errors}}
+                    <h3>{{this.msg}}</h3>
+                    {{/each}}
+                  {{/if}}
                   <H3>Your next movie could be just up the street.</H3>
                   <div class="col-sm-2 buttons"><button type="button" class="btn btn-default" id="new-user">Create New User</button></div>
               

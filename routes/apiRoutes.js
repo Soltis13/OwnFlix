@@ -33,12 +33,25 @@ module.exports = function(app) {
 
   // Create a new example
   //began working on a POST for a user
-  app.post("/api/user", function(req, res) {
+  app.post("/register", function(req, res, next) {
+    req.checkBody("email", "Please use a valid email.").isEmail();
+    req.checkBody("password", "Please use a valid email").notEmpty();
+    
+    var errors = req.validationErrors();
+
+    if (errors) {
+      res.render("index", {title: "Registration error"})
+    } else {
+
+    var email = req.body.email;
+    var password = req.body.password;
+    bcrypt.hash(password, saltRounds, function(err, hash) {
+      // Store hash in your password DB.
     db.User.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      password: req.body.password,
+      password: hash,
       address: req.body.address,
       city: req.body.city,
       state: req.body.state,
@@ -46,6 +59,8 @@ module.exports = function(app) {
     }).then(function(dbExample) {
       res.json(dbExample);
     });
+  });
+  }
   });
 
   // Delete an example by id
