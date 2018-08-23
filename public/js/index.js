@@ -234,6 +234,7 @@ $('#submit-new-user').on('click', function(e) {
       console.log("valid form");
 
       $.post('/api/user', data, function(r) {
+        console.log(data)
         console.log("Woo posted");
       })
     }
