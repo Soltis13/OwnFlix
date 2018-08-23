@@ -25,6 +25,15 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/api/movies", function(req, res) {
+    db.Movie.create({
+      title: req.body.title,
+      loanStatus: false,
+      omdbKey: req.body.omdbKey
+    });
+    res.json(res);
+  });
+
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
     db.Example.destroy({ where: { id: req.params.id } }).then(function() {

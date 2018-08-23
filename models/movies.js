@@ -1,13 +1,20 @@
 module.exports = function(sequelize, DataTypes) {
   var Movie = sequelize.define("Movie", {
-    movieEdition: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    mediaType: {
+    // movieEdition: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // },
+    // mediaType: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // },
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -22,15 +29,23 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
 
-    comments: {
+    // comments: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // },
+    // condition: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // }
+
+    omdbKey: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    condition: {
-      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]

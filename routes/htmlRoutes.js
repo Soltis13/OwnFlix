@@ -10,6 +10,15 @@ module.exports = function(app) {
       });
     });
   });
+  // added this route to test movies on 8/22/2018
+  app.get("/movies", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("movies", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
 
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
@@ -24,4 +33,4 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.render("404");
   });
-}
+};
