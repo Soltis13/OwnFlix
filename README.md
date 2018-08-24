@@ -6,6 +6,8 @@
 	[Installation Instructions](https://github.com/Soltis13/GroupProject2/wiki/Installation-Instructions)
 	on the Wiki.  
 
+
+
 ## Introduction  
 
 ### About.
@@ -20,6 +22,8 @@ Communication and cordination between movie owners.
 ### What is the primary goal of the product.  
 Demonstation of an online website to cordinate DVD sharing simmialr to the "Little Free Library" 
 
+
+
 ## Our Design Approach  
 
 ### API Considerations  
@@ -31,6 +35,8 @@ Body-parser
 
 
 ### Design Process  
+
+
 
 ## License  
 	Ownflix was created for demonstration purposes only as part of the University of Minnesota's Web Development Bootcamp Course and not intended for commercial use.    
