@@ -1,6 +1,11 @@
+/*Public facing style page */
+/*=============================*/
+
+
 .list-group-item {
   line-height: 2.5;
 }
+
 /* Background */
 body{
     background-color: rgba(12, 9, 9, 0.6);
@@ -16,7 +21,6 @@ body{
 .jumbotron{
     margin: 2rem 0;
 }
-
 #logo{
     font-family: 'karla', sans-serif;
     font-size:3rem;
@@ -24,16 +28,37 @@ body{
     color: #D72f2f;
     text-shadow: 2px 1px 1px  rgba(29, 28, 28, 0.705)
 }
-#sign-in, #search-button, #your-movies-button, #User-dashboard  {
+#sign-in, #search-button, #your-movies-button, #User-dashboard, #dashboard-button, #user-page-button, #searchMovieBtn, #rentMovieBtn  {
     float:right; 
     margin-top: 1rem; 
     background-color: #D72f2f;
     text-shadow: 1px .5px .5px  rgba(235, 218, 218, 0.493)
 }
 
+/* Bounce In */
+.hvr-bounce-in {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+  }
+  .hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+    transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+  }
+
 #login .buttons{
     margin-top:2em;
     text-shadow: 1px .5px .5px  rgb(139, 95, 95)
+}
+
+.slideshow{
+    margin: 2rem 0;
 }
 
 /* Front Page ID login-view*/
@@ -66,5 +91,10 @@ body{
 }
 
 /* Search Page */
+#addButtonForm{
+    margin: 3rem 0;
+}
+#searchMovie, #rentMovie{
+    width: 100%;
+}
 
-/* Movie Page */
