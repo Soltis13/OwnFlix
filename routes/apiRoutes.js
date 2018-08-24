@@ -73,32 +73,36 @@ module.exports = function(app) {
       city: req.body.city,
       state: req.body.state,
       zip: req.body.zip
-    }).then(function() {
-      sequelize.query("SELECT LAST_INSERT_ID() as user_id", function(error, results, field) {
-        if (error) throw error;
-        var user_id = results[0];
-        console.log(user_id)
-        req.login(user_id, function(error) { 
-          console.log("Success creating user")
-        }) // login() this is a passportjs method
+    }).then(function(){
+      db.User.findAll({
+        limit: 1,
+        where: {
+          email: email
+        },
+        order: [["createdAt", "DESC"]]
+      }).then(function(userIDquery){
+        var userID = userIDquery[0]
+        console.log("USER ID: " + JSON.stringify(userID));
+        req.login(userID, function(error){
+          res.redirect("/")
+        })
       })
-      // res.render("index", {title: "Registration completed"})
-    });
+    })
   });
   }
   });
 
 // SERIALIZATION
   //serialize the user
-  passport.serializeUser(function(user, done){
-    console.log("User id is saved to the session file here")
-    done(null, user_id);
+  passport.serializeUser(function(userID, done){
+    console.log("Serialized: User id is saved to the session file here")
+    done(null, userID);
   })
 
   //deserialize the user
-  passport.deserializeUser(function(user, done){
-    console.log("User id is saved to the session file here")
-    done(null, user_id);
+  passport.deserializeUser(function(userID, done){
+    console.log("Deserialized: User id is saved to the session file here")
+    done(null, userID);
   })
 
 
