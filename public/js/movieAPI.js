@@ -79,9 +79,17 @@ console.log(queryURL)
     url: queryURL,
     method: "GET"
   }).then(function (response) {
+
+
+
+
+    //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
+
+    
     console.log(response)
     var movieDiv = $("<div>")
 
+    //movie title
     var p = $("<p>")
 
     p.html(response.Title)
@@ -90,7 +98,7 @@ console.log(queryURL)
 
     p = $("<p>")
 
-
+    //movie plot
     p.html(response.Plot)
 
     movieDiv.append(p)
@@ -101,6 +109,10 @@ console.log(queryURL)
 
     movieDiv.append(newImg)
 
+
+    //the "claim it" button has all the data for the movies table"
+    //
+    //x title, loanStatus, loanerID, x plot,x poster, x actors, x omdbKey, x director
     var button = $("<button>")
 
     button.html("Claim It")
@@ -108,6 +120,14 @@ console.log(queryURL)
     button.attr("keyID", response.imdbID)
 
     button.attr("title", response.Title)
+
+    button.attr("plot", response.Plot)
+
+    button.attr("poster", response.Poster)
+
+    button.attr("actors", response.Actors)
+
+    button.attr("director", response.Director)
 
     button.attr("id", "claimMovie")
 
@@ -122,25 +142,19 @@ console.log(queryURL)
     $(".movieClicked").append(movieDiv)
     $('#movieSelectedModal').css('display', 'block');
   })
-
-
-
-
-
 })
-
-
 
 $('body').on('click', '#claimMovie', function () {
 
-
-  var movieKey = $(this).attr("keyID")
-
-  var movieTitle = $(this).attr("title")
-
+    //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
   var data = {
-    title: movieTitle,
-    omdbKey: movieKey
+    title: $(this).attr("title"),
+    omdbKey:  $(this).attr("keyID"),
+    plot: $(this).attr("plot"),
+    poster:  $(this).attr("poster"),
+    actors: $(this).attr("actors"),
+    director: $(this).attr("director"),
+    loanStatus: false
   }
   console.log(data)
   $.ajax({
