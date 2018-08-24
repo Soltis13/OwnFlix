@@ -1,3 +1,6 @@
+//
+//
+
 $("#searchMovieBtn").on("click", function () {
   console.log("clicked")
   event.preventDefault();
@@ -60,8 +63,6 @@ $("#searchMovieBtn").on("click", function () {
       $("#movies-view").prepend(newDiv);
 
     })
-
-
   });
 });
 
@@ -73,12 +74,13 @@ $('body').on('click', '.addMovie', function () {
     "https://www.omdbapi.com/?i=" +
     $(this).attr("omdbKey") +
     "&apikey=trilogy";
-console.log(queryURL)
-  // Creates AJAX call for the specific movie button being clicked
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function (response) {
+
+    console.log(queryURL)
+      // Creates AJAX call for the specific movie button being clicked
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
 
 
 
