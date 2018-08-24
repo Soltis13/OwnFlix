@@ -98,46 +98,39 @@ var handleDeleteBtnClick = function() {
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
-
 //New added code below
 
 //onclick event of button click
-$("#sign-in").on("click", function(event){
-    event.preventDefault();
-    $('#sign-in-modal').css('display', 'block');
-
-
-})
-
-//onclick event of button click
-$("#create-new-user").on("click", function(event){
-    event.preventDefault();
-    $('#new-user-modal').css('display', 'block');
-
-})
-
-$("#new-user").on("click", function(event){
-    event.preventDefault();
-    //handle the 'New? Sign up now button' ie hide sign in modal
-    $('#sign-in-modal').css('display', 'none');
-    $('#new-user-modal').css('display', 'block');
-})
-
-//onclick event of - send to user dashboard
-$("#submit-user").on("click", function(event){
-    event.preventDefault();
-    window.location = "UserPage.html";
-
-})
-
-// when you clicka da x da modal go away
-$('.close').on('click', function(e) {
-  $('.modal').css('display', 'none');
+$("#sign-in").on("click", function(event) {
+  event.preventDefault();
+  $("#sign-in-modal").css("display", "block");
 });
 
+//onclick event of button click
+$("#create-new-user").on("click", function(event) {
+  event.preventDefault();
+  $("#new-user-modal").css("display", "block");
+});
+
+$("#new-user").on("click", function(event) {
+  event.preventDefault();
+  //handle the 'New? Sign up now button' ie hide sign in modal
+  $("#sign-in-modal").css("display", "none");
+  $("#new-user-modal").css("display", "block");
+});
+
+//onclick event of - send to user dashboard
+$("#submit-user").on("click", function(event) {
+  event.preventDefault();
+  window.location = "UserPage.html";
+});
+
+// when you clicka da x da modal go away
+$(".close").on("click", function(e) {
+  $(".modal").css("display", "none");
+});
 
 // Validate login
-
 
 //
 

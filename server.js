@@ -15,7 +15,6 @@ var expressValidator = require("express-validator");
 var Sequelize = require("sequelize");
 var passport = require("passport");
 
-
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -23,12 +22,14 @@ var PORT = process.env.PORT || 3000;
 var saltRounds = 10;
 
 // Express-Session cookie config
-app.use(session({
-  secret: "somestuffhere", //this is a salt
-  resave: false,
-  saveUninitialized: false, //prevent cookie unless logged in
-  cookie: {secure: false}
-}));
+app.use(
+  session({
+    secret: "somestuffhere", //this is a salt
+    resave: false,
+    saveUninitialized: false, //prevent cookie unless logged in
+    cookie: { secure: false }
+  })
+);
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -65,7 +66,10 @@ require("./routes/htmlRoutes")(app);
 var syncOptions = { force: false };
 
 //access the keys
-var clientmoviedb = new MovieDB(client.moviedb);
+
+//commented out the info below
+
+//var clientmoviedb = new MovieDB(client.moviedb);
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`

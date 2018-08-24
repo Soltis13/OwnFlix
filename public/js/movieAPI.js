@@ -2,6 +2,7 @@
 //
 
 $("#searchMovieBtn").on("click", function () {
+  $("#movies-view").empty()
   console.log("clicked")
   event.preventDefault();
   var movieToSearch = $("#searchMovie")
@@ -11,7 +12,7 @@ $("#searchMovieBtn").on("click", function () {
   var queryURL =
     "https://www.omdbapi.com/?s=" +
     movieToSearch +
-    "&y=&plot=short&apikey=trilogy";
+    "&y=&plot=short&type=movie&apikey=trilogy";
 
   // Creates AJAX call for the specific movie button being clicked
   $.ajax({
@@ -34,15 +35,15 @@ $("#searchMovieBtn").on("click", function () {
 
       var omdbKey = element.imdbID
 
-      var titleH2 = $("<h2>")
+      var titleH3 = $("<h3>")
 
       newDiv.attr("title", titleInfo)
 
       newDiv.attr("omdbKey", omdbKey)
 
-      titleH2.html(titleInfo)
+      titleH3.html(titleInfo)
 
-      newDiv.append(titleH2);
+      newDiv.append(titleH3);
 
       var releaseYear = element.Year;
       // Creates an element to hold the release year
@@ -170,7 +171,7 @@ $('body').on('click', '#claimMovie', function () {
 })
 
 $('body').on('click', '#closeModal', function () {
-  $('#movieSelectedModal').css('none');
+  $('.modal').css('display', 'none');
   $(".movieClicked").empty()
  
 

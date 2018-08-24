@@ -1,6 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
   var Movie = sequelize.define("Movie", {
-
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -57,7 +56,6 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     }
-
   });
   Movie.associate = function(models) {
     Movie.belongsTo(models.User, {
