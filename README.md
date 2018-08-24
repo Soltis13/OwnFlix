@@ -41,7 +41,7 @@ Human-centered design is motivated by creating solutions for problems and opport
 ## License  
 	Ownflix was created for demonstration purposes only as part of the University of Minnesota's Web Development Bootcamp Course and not intended for commercial use.    
 
-	Ownflix is licensed under the GNU General Public License v3.0, also included in our repository in the COPYING file.  
+	Ownflix is licensed under the MIT License.  
 
 
 
