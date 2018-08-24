@@ -68,12 +68,12 @@ $("#searchMovieBtn").on("click", function () {
 $('body').on('click', '.addMovie', function () {
 
   event.preventDefault();
-  $('#movieSelectedModal').css('display', 'block');
+
   var queryURL =
     "https://www.omdbapi.com/?i=" +
     $(this).attr("omdbKey") +
-    "&y=&plot=short&apikey=trilogy";
-
+    "&apikey=trilogy";
+console.log(queryURL)
   // Creates AJAX call for the specific movie button being clicked
   $.ajax({
     url: queryURL,
@@ -120,7 +120,7 @@ $('body').on('click', '.addMovie', function () {
     movieDiv.append(button)
 
     $(".movieClicked").append(movieDiv)
-
+    $('#movieSelectedModal').css('display', 'block');
   })
 
 
