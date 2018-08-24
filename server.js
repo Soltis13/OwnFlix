@@ -2,16 +2,32 @@ require("dotenv").config();
 var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
+var session = require("express-session");
+var LocalStrategy = require("passport-local").Strategy;
+var bcrypt = require("bcrypt");
+var expressValidator = require("express-validator");
+var Sequelize = require("sequelize");
+
 
 var db = require("./models");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
+var saltRounds = 10;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(expressValidator());
 app.use(express.static("public"));
+
+// Express-Session cookie config
+app.use(session({
+  secret: "somestuffhere", //this is a salt
+  resave: false,
+  saveUninitialized: false //prevent cookie unless logged in
+  // cookie: {secure: true} use with HTTPS
+}));
 
 // Handlebars
 app.engine(
