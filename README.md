@@ -11,16 +11,16 @@ on the Wiki.
 ## Introduction  
 
 ### About.
-Think "little Free Library" meets Netflix.  Many individuals like to buy movies on DVD and Blueray. However, after the first few viewings those same movies just collect dust on the livingroom bookshelf. The idea behind OWNFLIX is to provide a platform to allow movie owners to connect and share.
+Think "little Free Library" meets Netflix.  Many individuals like to buy movies on DVD and Blue ray. However, after the first few viewings those same movies just collect dust on the living room bookshelf. The idea behind OWNFLIX is to provide a platform to allow movie owners to connect and share.
 
 ### Target Audience?  
 Movie lovers who are also interested in sharing with their local community.
 
 ### What is the problem to address.  
-Communication and cordination between movie owners.
+Communication and coordination between movie owners.
 
 ### What is the primary goal of the product.  
-Demonstation of an online website to cordinate DVD sharing simmialr to the "Little Free Library" 
+Demonstration of an online website to coordinate DVD sharing similar to the "Little Free Library" 
 
 
 
@@ -36,6 +36,8 @@ Express-handlebars
 
 ### Design Process  
 Human-centered design is motivated by creating solutions for problems and opportunities through a focus on the needs, contexts, behaviors, and emotions of the people that the solutions will serve.
+
+Further Design decisions and processes can be found in the wiki page Design.
 
 
 ## License  
