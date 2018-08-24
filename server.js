@@ -8,11 +8,27 @@ require("dotenv").config();
 var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
+var session = require("express-session");
+var LocalStrategy = require("passport-local").Strategy;
+var bcrypt = require("bcrypt");
+var expressValidator = require("express-validator");
+var Sequelize = require("sequelize");
+var passport = require("passport");
+
 
 // Sets up the Express App
 // =============================================================
 var app = express();
 var PORT = process.env.PORT || 3000;
+var saltRounds = 10;
+
+// Express-Session cookie config
+app.use(session({
+  secret: "somestuffhere", //this is a salt
+  resave: false,
+  saveUninitialized: false, //prevent cookie unless logged in
+  cookie: {secure: false}
+}));
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -20,7 +36,18 @@ var db = require("./models");
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(expressValidator());
 app.use(express.static("public"));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// // Express-Session cookie config
+// app.use(session({
+//   secret: "somestuffhere", //this is a salt
+//   resave: false,
+//   saveUninitialized: false, //prevent cookie unless logged in
+//   cookie: {secure: false}
+// }));
 
 // Handlebars
 app.engine(

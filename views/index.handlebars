@@ -14,16 +14,18 @@
     </div>
 </div>
 
-<!--Main Content Div-->
-<div class="container">
-    <div class="row" id="login">
-        <div class = "col-sm-12">
-            <!--containers get put here-->
-            <div id="login-view">
-                <H1>See What's Next</H1>
-                <H3>Your next movie could be just up the street.</H3>
-                <div class="col-sm-2 buttons"><button type="button" class="btn btn-default hvr-bounce-in" id="new-user">Create New User</button></div>
-            
+  <!--Main Content Div-->
+  <div class="container">
+
+      <div class="row" id="login">
+          <div class = "col-sm-12">
+              <!--containers get put here-->
+              <div id="login-view">
+                  <h1>{{title}}</h1>
+                  <H1>See What's Next</H1>
+                  <H3>Your next movie could be just up the street.</H3>
+                  <div class="col-sm-2 buttons"><button type="button" class="btn btn-default" id="new-user">Create New User</button></div>
+
                 <div class="col-sm-12 slideshow">
                     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
@@ -47,13 +49,15 @@
 <!-- New User Modal Content -->
 <div id='new-user-modal' class='modal'>
 
+
     <div class='row' id='modal-content'>
         <div class='col-sm-3'></div>
             <div class='col-sm-6 sign-in-form'>
                 <span class="close">&times;</span>
                 <h3>Create Account</h3>
 
-                <form id='create-account-form' name='new-user-form'>
+                <form id='create-account-form' name='new-user-form' action="/register" method="POST">
+
                 <br><label for="firstName">First Name</label><input name='firstName' type='text' id='firstName'>
                 <br>
                 <br>
