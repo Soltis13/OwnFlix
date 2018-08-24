@@ -2,9 +2,9 @@
 
 ## Building the Source  
 
-	For prerequisites and detailed instructions please read the
-	[Installation Instructions](https://github.com/Soltis13/GroupProject2/wiki/Installation-Instructions)
-	on the Wiki.  
+For prerequisites and detailed instructions please read the
+[Installation Instructions](https://github.com/Soltis13/GroupProject2/wiki/Installation-Instructions)
+on the Wiki.  
 
 
 
