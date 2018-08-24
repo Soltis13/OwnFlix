@@ -137,6 +137,8 @@ console.log(queryURL)
 
     button.html("Go Back")
 
+    button.attr("id", "closeModal")
+
     movieDiv.append(button)
 
     $(".movieClicked").append(movieDiv)
@@ -162,5 +164,13 @@ $('body').on('click', '#claimMovie', function () {
     url: "/api/movies",
     data: data,
   });
+
+})
+
+$('body').on('click', '#closeModal', function () {
+  $('#movieSelectedModal').css('none');
+  $(".movieClicked").empty()
+ 
+
 
 })
