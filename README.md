@@ -1,31 +1,32 @@
-# Project Requirements
-I MADE THIS CHANGE. I AM JOE.
-=======
+## OWNFLIX.  A Local DVD Sharing Platform.  
 
-I made a change to this to ssee if we can get Travis to work
+## Building the Source  
 
-This document outlines the base requirements for Project 2.
+	For prerequisites and detailed instructions please read the Installation Instructions on the Wiki.  
 
-### Requirements
+## Introduction  
 
-Your project must:
+	### Target Audience?  
 
-* Use a Node and Express Web Server;
+	### User Stories.  
 
-* Be backed by a MySQL Database an ORM (not necessarily Sequelize);
+	### What is the problem to address.  
 
-* Have both GET and POST routes for retrieving and adding new data;
+	### What is the primary goal of the product.  
 
-* Be deployed using Heroku (with Data);
+## Our Design Approach  
 
-* Utilize at least one new library, package, or technology that we haven’t discussed;
+	### API Considerations  
+	
+	### Libraries  
+	
+	### Design Process  
 
-* Have a polished frontend / UI;
+## License  
+	Ownflix was created for demonstration purposes only as part of the University of Minnesota's Web Development Bootcamp Course and not intended for commercial use.    
 
-* Have folder structure that meets MVC Paradigm;
+	Ownflix is licensed under the GNU General Public License v3.0, also included in our repository in the COPYING file.  
 
-* Meet good quality coding standards (indentation, scoping, naming).
 
-* Must not expose sensitive API key information on the server, see [Protecting-API-Keys-In-Node.md](../../../10-nodejs/03-Supplemental/Protecting-API-Keys-In-Node.md)
 
 
