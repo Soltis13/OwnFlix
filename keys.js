@@ -1,7 +1,5 @@
 //console.log('this is loaded');
 
-
-exports.spotify = {
-  id: process.env.MovieDB_ID,
-  
+exports.moviedb = {
+  id: process.env.MovieDB_ID
 };

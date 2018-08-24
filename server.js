@@ -1,3 +1,9 @@
+// *****************************************************************************
+// Server.js - This file is the initial starting point for the Node/Express server.
+//
+// ******************************************************************************
+// *** Dependencies
+// =============================================================
 require("dotenv").config();
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -10,8 +16,8 @@ var Sequelize = require("sequelize");
 var passport = require("passport");
 
 
-var db = require("./models");
-
+// Sets up the Express App
+// =============================================================
 var app = express();
 var PORT = process.env.PORT || 3000;
 var saltRounds = 10;
@@ -23,6 +29,9 @@ app.use(session({
   saveUninitialized: false, //prevent cookie unless logged in
   cookie: {secure: false}
 }));
+
+// Requiring our models for syncing
+var db = require("./models");
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -54,6 +63,9 @@ require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
+
+//access the keys
+var clientmoviedb = new MovieDB(client.moviedb);
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`

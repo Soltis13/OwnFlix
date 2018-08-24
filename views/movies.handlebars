@@ -1,25 +1,74 @@
-<form id="addButtonForm">
-          <label for="searchMovie">Add some more !</label>
-          <input type="text" id="searchMovie">
-          <br>
-          <!-- Button triggers new movie to be added -->
-          <input class="btn btn-info" id="searchMovieBtn" type="submit" value="Search a Movie">
-          
-          
-        </form>
-
-        <div id ="movies-view"></div>
-
-
-        
-        <!-- Sign In Modal -->
-        <div id='movieSelectedModal' class='modal'>
-
-          <div class='row' id='modal-content'>
-            <div class='col-sm-4'></div>
-            <div class='col-sm-4 movieClicked sign-in-form'>
-              
-
+<div class='userdash'>
+    <!--Header Div-->
+    <div class = "landing-header">
+        <!--logo and sign in button-->
+        <div class="container ">
+            <div class="row">
+                <div class="col-sm-2"><a class="navbar-brand text-dark"  href="landingPage.html"><p id="logo">OwnFlix</p></a></div>
+                <div class="col-sm-10" id="landing-header-view">
+                    <div class="row">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-2"><a class="navbar-brand text-dark"  href="DashboardPage.html" ><button type='button' class="btn btn-default" id="dashboard-button">Dashboard</button></a></div>
+                        <div class="col-sm-2"><a class="navbar-brand text-dark"  href="movies.html" ><button type='button' class="btn btn-default" id="user-page-button">User</button></a></div>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
+    </div>
+
+    <!--User information Section-->
+    <!--Pull user info from database post to page-->
+    <div class='container usercontainer'>
+        <div class='jumbotron userjumbotron'>
+            <div class='row'>
+                <div class='col-sm-12'>
+                    <div><h3><u>User Information</u></h3></div>
+                    <div class='row'>
+                        <div class='col-sm-12'>
+                            <!--populate user account data here or reference-->
+                            <div id='user-data'>User Data</div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-sm-12'>
+                            <!--User Table of movies owned here-->
+                            <div id='user-movies'>User Movie table</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--User movies owned--><!--Search movie db for owner ID--><!--update page with table of content-->
+    <!--location for search bar and results-->
+    <div class='container usercontainer'>
+        <div class='jumbotron userjumbotron'>
+            <div class='row'>
+                <div class='col-sm-12'>
+                    <div><h3><u>Add Your Movies Here</u></h3></div>
+                    <form id="addButtonForm">
+                        <label for="searchMovie">Search Movies</label>
+                        <input type="text" id="searchMovie">
+                        <br>
+                        <!-- Button triggers new movie to be added -->
+                        <input class="btn btn-info" id="searchMovieBtn" type="submit" value="Search a Movie">
+                    </form>
+                    
+                    <div id ="movies-view"></div>
+                        
+                    <!-- Sign In Modal -->
+                    <div id='movieSelectedModal' class='modal'>
+
+                        <div class='row' id='modal-content'>
+                            <div class='col-sm-4'></div>
+                            <div class='col-sm-4 movieClicked sign-in-form'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div> 
