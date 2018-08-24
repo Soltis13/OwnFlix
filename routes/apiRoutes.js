@@ -27,11 +27,15 @@ module.exports = function(app) {
 
   app.post("/api/movies", function(req, res) {
     console.log(req.body);
+    //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
     db.Movie.create({
       title: req.body.title,
       loanStatus: false,
-      UserId: "4",
-      omdbKey: req.body.omdbKey
+      omdbKey: req.body.omdbKey,
+      plot: req.body.plot,
+      poster: req.body.poster,
+      actors: req.body.actors,
+      director: req.body.director
     }).then(function(dbExample) {
       res.json(dbExample);
     });
