@@ -1,6 +1,11 @@
+/*Public facing style page */
+/*=============================*/
+
+
 .list-group-item {
   line-height: 2.5;
 }
+
 /* Background */
 body{
     background-color: rgba(12, 9, 9, 0.6);
@@ -16,7 +21,6 @@ body{
 .jumbotron{
     margin: 2rem 0;
 }
-
 #logo{
     font-family: 'karla', sans-serif;
     font-size:3rem;
