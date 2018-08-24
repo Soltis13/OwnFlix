@@ -14,6 +14,7 @@ var bcrypt = require("bcrypt");
 var expressValidator = require("express-validator");
 var Sequelize = require("sequelize");
 var passport = require("passport");
+var client = require("./keys.js");
 
 
 // Sets up the Express App
@@ -62,7 +63,7 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-var syncOptions = { force: false };
+var syncOptions = { force: false }; 
 
 //access the keys
 var clientmoviedb = new MovieDB(client.moviedb);
