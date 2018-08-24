@@ -32,10 +32,10 @@ Movie information is provided through themoviedb API.  https://developers.themov
 ### Libraries  
 Express
 Body-parser
-
+Express-handlebars
 
 ### Design Process  
-
+Human-centered design is motivated by creating solutions for problems and opportunities through a focus on the needs, contexts, behaviors, and emotions of the people that the solutions will serve.
 
 
 ## License  
