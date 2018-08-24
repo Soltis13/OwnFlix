@@ -20,6 +20,16 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/movies/:user", function(req, res) {
+    db.Movie.findAll({}).then(function(dbExamples) {
+      res.render("movies", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
+
+
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
     db.Example.findOne({ where: { id: req.params.id } }).then(function() {
