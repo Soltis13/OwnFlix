@@ -26,12 +26,15 @@ module.exports = function(app) {
   });
 
   app.post("/api/movies", function(req, res) {
+    console.log(req.body);
     db.Movie.create({
       title: req.body.title,
       loanStatus: false,
+      UserId: "4",
       omdbKey: req.body.omdbKey
+    }).then(function(dbExample) {
+      res.json(dbExample);
     });
-    res.json(res);
   });
 
   // Delete an example by id
