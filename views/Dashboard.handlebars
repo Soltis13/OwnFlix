@@ -21,7 +21,7 @@
         <div class='container usercontainer'>
                 <div class='jumbotron' style=" background-color: rgba(12, 9, 9, 0.6); color: whitesmoke">
                 <div class="row">
-                    
+
                     <div class = "col-sm-12" >
                         <!--containers get put here-->
                         <h3><u>Currently Checked Out</u></h3>
@@ -30,11 +30,33 @@
                                 <div class="row">
                                     <div class="col-sm-12 "><a href="Search"><img src="img/BlankPoster.png"></a></div>
                                 </div>
-      
+
                         </div>
                     </div>
                 </div>
             </div>
- 
+
         </div>
-    </div>  
+    </div>
+
+		<div class='container ownedcontainer'>
+						<div class='jumbotron' style=" background-color: rgba(12, 9, 9, 0.6); color: whitesmoke">
+						<div class="row">
+
+								<div class = "col-sm-12" >
+										<!--containers get put here-->
+										<h3><u>Claimed/Owned</u></h3>
+										{{#each ownedResult}}
+											<div class="owned-wrap" data-id={{ownedResult.id}}>
+												<img src={{ownedResult.poster}} />
+												<h2>{{ownedResult.title}}</h2>
+												<p>Loan Status : {{#if ownedResult.loanStatus}} <span>Lent Out</span>{{ else }}<span>Not Lent Out</span>{{/if}}</p>
+
+											</div>
+										{{/each}}
+
+						</div>
+				</div>
+
+		</div>
+</div>
