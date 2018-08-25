@@ -15,27 +15,34 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/dashboard', function(req, res) {
-    if (req.session.userID) {
+  app.get('/Dashboard', function(req, res) {
+    let userParse = JSON.parse(req.user);
+    console.log(userParse.id);
+    if (req.user) {
       // Searching for user movies they are borrowing currently
       db.Movie.findAll({
         attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
         where: {
-          loanerID: req.session.userID
+          loanerID: userParse.id,
+          loanStatus: true
         }
       }).then(function(borrowingResult) {
         db.Movie.findAll({
           attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
           where: {
-            UserID: req.session.userID
+            UserID: userParse.id
           }
         }).then(function(ownedResult) {
+          console.log(ownedResult);
           res.render(
-            "dashboard",
+            "Dashboard",
             {rented: borrowingResult, owned: ownedResult}
             );
           });
       });
+    }
+    else {
+      res.render("404");
     }
   });
 
@@ -49,25 +56,7 @@ module.exports = function(app) {
     });
   });
 
-  // added this route to test Dashboard on 8/24/2018
-  app.get("/Dashboard", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("Dashboard", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
-    });
-  });
 
-    // added this route to test Search on 8/24/2018
-  app.get("/Search", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("Search", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
-    });
-  });
 
   app.get("/movies/:user", function(req, res) {
     db.Movie.findAll({}).then(function(dbExamples) {
