@@ -2,6 +2,7 @@
 //
 
 $("#searchMovieBtn").on("click", function () {
+  $("#movies-view").empty()
   console.log("clicked")
   event.preventDefault();
   var movieToSearch = $("#searchMovie")
@@ -11,7 +12,7 @@ $("#searchMovieBtn").on("click", function () {
   var queryURL =
     "https://www.omdbapi.com/?s=" +
     movieToSearch +
-    "&y=&plot=short&apikey=trilogy";
+    "&y=&plot=short&type=movie&apikey=trilogy";
 
   // Creates AJAX call for the specific movie button being clicked
   $.ajax({
@@ -23,10 +24,11 @@ $("#searchMovieBtn").on("click", function () {
     response.Search.forEach(element => {
 
       console.log(element)
-      var newDiv = $("<div>");
+      var newDiv = $("<div class='col-sm-4' style='padding:1rem; margin:auto'>");
 
-      newDiv.addClass("addMovie")
+      var theDiv = $("<div>");
 
+      theDiv.addClass("addMovie");
 
 
       // Retrieves the Rating Data
@@ -34,15 +36,15 @@ $("#searchMovieBtn").on("click", function () {
 
       var omdbKey = element.imdbID
 
-      var titleH2 = $("<h2>")
+      var titleH3 = $("<h3>")
 
-      newDiv.attr("title", titleInfo)
+      theDiv.attr("title", titleInfo)
 
-      newDiv.attr("omdbKey", omdbKey)
+      theDiv.attr("omdbKey", omdbKey)
 
-      titleH2.html(titleInfo)
+      titleH3.html(titleInfo)
 
-      newDiv.append(titleH2);
+      theDiv.append(titleH3);
 
       var releaseYear = element.Year;
       // Creates an element to hold the release year
@@ -50,16 +52,17 @@ $("#searchMovieBtn").on("click", function () {
       // Displays the release year
       releaseYearP.html("Release year: " + releaseYear);
 
-      newDiv.append(releaseYearP);
+      theDiv.append(releaseYearP);
 
       var image = element.Poster;
       // Creates an element to hold the image
-      var imgElement = $("<img>");
+      var imgElement = $("<img onerror='if (this.src == N/A') this.src = 'img/error.jpg'' height='300px width='250px'>");
+      //<img src="foo.jpg" onerror="if (this.src != 'error.jpg') this.src = 'error.jpg';">
       imgElement.attr("src", image);
       // Appends the image
-      newDiv.append(imgElement);
+      theDiv.append(imgElement);
       // Puts the entire Movie above the previous movies.
-
+      newDiv.append(theDiv);
       $("#movies-view").prepend(newDiv);
 
     })
@@ -139,6 +142,8 @@ $('body').on('click', '.addMovie', function () {
 
     button.html("Go Back")
 
+    button.attr("id", "closeModal")
+
     movieDiv.append(button)
 
     $(".movieClicked").append(movieDiv)
@@ -164,5 +169,13 @@ $('body').on('click', '#claimMovie', function () {
     url: "/api/movies",
     data: data,
   });
+
+})
+
+$('body').on('click', '#closeModal', function () {
+  $('.modal').css('display', 'none');
+  $(".movieClicked").empty()
+ 
+
 
 })
