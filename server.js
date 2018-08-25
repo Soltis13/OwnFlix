@@ -14,6 +14,9 @@ var bcrypt = require("bcrypt");
 var expressValidator = require("express-validator");
 var Sequelize = require("sequelize");
 var passport = require("passport");
+var client = require("./keys.js");
+var Moviedb = require("moviedb");
+var OmdbApi = require('omdb-client');
 
 // Sets up the Express App
 // =============================================================
@@ -63,13 +66,11 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-var syncOptions = { force: false };
+var syncOptions = { force: false }; 
 
 //access the keys
-
-//commented out the info below
-
-//var clientmoviedb = new MovieDB(client.moviedb);
+var clientmoviedb = new Moviedb(client.moviedb);
+//var clientomdb= new OmdbApi(client.omdb);
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
