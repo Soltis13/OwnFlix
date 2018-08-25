@@ -10,6 +10,31 @@ module.exports = function(app) {
       });
     });
   });
+
+  app.get('/dashboard', function(req, res) {
+    if (req.session.userID) {
+      // Searching for user movies they are borrowing currently
+      db.Movie.findAll({
+        attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
+        where: {
+          loanerID: req.session.userID
+        }
+      }).then(function(borrowingResult) {
+        db.Movie.findAll({
+          attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
+          where: {
+            UserID: req.session.userID
+          }
+        }).then(function(ownedResult) {
+          res.render(
+            "dashboard",
+            {rented: borrowingResult, owned: ownedResult}
+            );
+          });
+      });
+    }
+  });
+
   // added this route to test movies on 8/22/2018
   app.get("/movies", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {

@@ -7,7 +7,6 @@ module.exports = function(app) {
       res.json(dbExamples);
     });
   });
-
   // Create a new example
   //began working on a POST for a user
   app.post("/api/user", function(req, res) {
