@@ -82,9 +82,10 @@ module.exports = function(app) {
         order: [["createdAt", "DESC"]]
       }).then(function(userIDquery){
         var userID = userIDquery[0]
-        console.log("USER ID: " + JSON.stringify(userID));
-        req.login(userID, function(error){
-          res.redirect("/")
+        var JSONuser = JSON.stringify(userID)
+        console.log("USER ID: " + JSONuser);
+        req.login(JSONuser, function(error){
+          res.redirect("/Dashboard")
         })
       })
     })

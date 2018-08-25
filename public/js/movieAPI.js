@@ -1,36 +1,28 @@
-//
+
 //
 
 $("#searchMovieBtn").on("click", function () {
+  event.preventDefault();
   $("#movies-view").empty()
   console.log("clicked")
-  event.preventDefault();
+
   var movieToSearch = $("#searchMovie")
     .val()
     .trim();
-
-  var queryURL =
-    "https://www.omdbapi.com/?s=" +
-    movieToSearch +
-    "&y=&plot=short&type=movie&apikey=trilogy";
-
-  // Creates AJAX call for the specific movie button being clicked
   $.ajax({
-    url: queryURL,
+
+    url: "movies/search/" + movieToSearch,
     method: "GET"
+
   }).then(function (response) {
+    var response = JSON.parse(response)
     // Creates a div to hold the movie
-    console.log(response)
+  
     response.Search.forEach(element => {
 
-      console.log(element)
       var newDiv = $("<div>");
-
       newDiv.addClass("addMovie")
 
-
-
-      // Retrieves the Rating Data
       var titleInfo = element.Title
 
       var omdbKey = element.imdbID
@@ -70,26 +62,15 @@ $("#searchMovieBtn").on("click", function () {
 $('body').on('click', '.addMovie', function () {
 
   event.preventDefault();
+  var omdbID = $(this).attr("omdbKey")
 
-  var queryURL =
-    "https://www.omdbapi.com/?i=" +
-    $(this).attr("omdbKey") +
-    "&apikey=trilogy";
-
-    console.log(queryURL)
-      // Creates AJAX call for the specific movie button being clicked
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function (response) {
-
-
-
-
-    //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
-
-    
-    console.log(response)
+  
+  // Creates AJAX call for the specific movie button being clicked
+  $.ajax({
+    url: "/movies/search/title/" + omdbID,
+    method: "GET"
+  }).then(function (response) {
+    var response = JSON.parse(response)
     var movieDiv = $("<div>")
 
     //movie title
@@ -151,12 +132,12 @@ $('body').on('click', '.addMovie', function () {
 
 $('body').on('click', '#claimMovie', function () {
 
-    //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
+  //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
   var data = {
     title: $(this).attr("title"),
-    omdbKey:  $(this).attr("keyID"),
+    omdbKey: $(this).attr("keyID"),
     plot: $(this).attr("plot"),
-    poster:  $(this).attr("poster"),
+    poster: $(this).attr("poster"),
     actors: $(this).attr("actors"),
     director: $(this).attr("director"),
     loanStatus: false
@@ -173,7 +154,7 @@ $('body').on('click', '#claimMovie', function () {
 $('body').on('click', '#closeModal', function () {
   $('.modal').css('display', 'none');
   $(".movieClicked").empty()
- 
+
 
 
 })
