@@ -2,6 +2,8 @@
 //
 
 $("#searchMovieBtn").on("click", function () {
+  $("#movies-view").empty()
+  console.log("clicked")
   event.preventDefault();
   $("#movies-view").empty()
   console.log("clicked")
@@ -20,22 +22,28 @@ $("#searchMovieBtn").on("click", function () {
   
     response.Search.forEach(element => {
 
-      var newDiv = $("<div>");
-      newDiv.addClass("addMovie")
+      console.log(element)
+      var newDiv = $("<div class='col-sm-4' style='padding:1rem; margin:auto'>");
 
+      var theDiv = $("<div>");
+
+      theDiv.addClass("addMovie");
+
+
+      // Retrieves the Rating Data
       var titleInfo = element.Title
 
       var omdbKey = element.imdbID
 
       var titleH3 = $("<h3>")
 
-      newDiv.attr("title", titleInfo)
+      theDiv.attr("title", titleInfo)
 
-      newDiv.attr("omdbKey", omdbKey)
+      theDiv.attr("omdbKey", omdbKey)
 
       titleH3.html(titleInfo)
 
-      newDiv.append(titleH3);
+      theDiv.append(titleH3);
 
       var releaseYear = element.Year;
       // Creates an element to hold the release year
@@ -43,16 +51,17 @@ $("#searchMovieBtn").on("click", function () {
       // Displays the release year
       releaseYearP.html("Release year: " + releaseYear);
 
-      newDiv.append(releaseYearP);
+      theDiv.append(releaseYearP);
 
       var image = element.Poster;
       // Creates an element to hold the image
-      var imgElement = $("<img>");
+      var imgElement = $("<img onerror='if (this.src == N/A') this.src = 'img/error.jpg'' height='300px width='250px'>");
+      //<img src="foo.jpg" onerror="if (this.src != 'error.jpg') this.src = 'error.jpg';">
       imgElement.attr("src", image);
       // Appends the image
-      newDiv.append(imgElement);
+      theDiv.append(imgElement);
       // Puts the entire Movie above the previous movies.
-
+      newDiv.append(theDiv);
       $("#movies-view").prepend(newDiv);
 
     })
@@ -154,7 +163,6 @@ $('body').on('click', '#claimMovie', function () {
 $('body').on('click', '#closeModal', function () {
   $('.modal').css('display', 'none');
   $(".movieClicked").empty()
-
 
 
 })

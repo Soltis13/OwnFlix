@@ -26,7 +26,6 @@ module.exports = function(app) {
       res.json(dbExamples);
     });
   });
-
   // Create a new example
   //began working on a POST for a user
   // app.post("/api/user", function(req, res) {
@@ -52,7 +51,7 @@ module.exports = function(app) {
   app.post("/register", function(req, res) {
     req.checkBody("email", "Please use a valid email.").isEmail();
     req.checkBody("password", "Please use a valid email").notEmpty();
-    
+
     var errors = req.validationErrors();
 
     if (errors) {
@@ -82,9 +81,8 @@ module.exports = function(app) {
         order: [["createdAt", "DESC"]]
       }).then(function(userIDquery){
         var userID = userIDquery[0]
-        var JSONuser = JSON.stringify(userID)
-        console.log("USER ID: " + JSONuser);
-        req.login(JSONuser, function(error){
+        console.log("USER ID: " + JSON.stringify(userID));
+        req.login(JSON.stringify(userID), function(error){
           res.redirect("/Dashboard")
         })
       })
@@ -108,6 +106,7 @@ module.exports = function(app) {
 
 
   app.post("/api/movies", function(req, res) {
+    let userParsed = JSON.parse(req.user);
     console.log(req.body);
     //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
     db.Movie.create({
@@ -117,7 +116,8 @@ module.exports = function(app) {
       plot: req.body.plot,
       poster: req.body.poster,
       actors: req.body.actors,
-      director: req.body.director
+      director: req.body.director,
+      UserId: userParsed.id
     }).then(function(dbExample) {
       res.json(dbExample);
     });

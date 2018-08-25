@@ -1,5 +1,5 @@
 {
-  "name": "node-handlebars-boilerplate",
+  "name": "handlebars-boilerplate",
   "version": "1.0.0",
   "description": "Project 2 Starter",
   "main": "server.js",
@@ -39,5 +39,17 @@
     "mocha": "^5.2.0",
     "prettier": "^1.14.2",
     "prettier-eslint": "^8.8.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soltis13/GroupProject2.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/Soltis13/GroupProject2/issues"
+  },
+  "homepage": "https://github.com/Soltis13/GroupProject2#readme"
 }

@@ -130,6 +130,20 @@ $(".close").on("click", function(e) {
   $(".modal").css("display", "none");
 });
 
+<<<<<<< HEAD
+=======
+// $('#submit-sign-in').on('click', function(e) {
+//   // post to sign-in verify api, which will redirect to /Dashboard hopefully
+//   e.preventDefault();
+//
+//   $.post('/api/verify-sign-in', {email: '', password: ''}).then(function(response) {
+//     console.log('verified');
+//   }).catch(function(e) {
+//     console.log('invalid login creds');
+//   })
+// })
+
+>>>>>>> 7a16ac57d3f7755918a523d6669cb89f9db24309
 // Validate login
 
 //
