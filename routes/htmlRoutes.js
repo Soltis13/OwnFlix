@@ -24,6 +24,26 @@ module.exports = function(app) {
     });
   });
 
+  // added this route to test Dashboard on 8/24/2018
+  app.get("/Dashboard", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("Dashboard", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
+
+    // added this route to test Search on 8/24/2018
+  app.get("/Search", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("Search", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
+
   app.get("/movies/:user", function(req, res) {
     db.Movie.findAll({}).then(function(dbExamples) {
       res.render("movies", {

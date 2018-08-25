@@ -12,11 +12,11 @@
 
 
 /* Header / title  landing-header*/
-.usercontainer{
+#usercontainer{
     padding-top:2em;
     background-color: rgba(12, 9, 9, 0.6);
 }
-.userjumbotron{
+#usercontainer #userjumbotron{
     margin: 2rem 0;
     background-color: rgba(12, 9, 9, 0.6);
     color: whitesmoke
