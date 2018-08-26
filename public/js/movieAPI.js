@@ -23,11 +23,10 @@ $("#searchMovieBtn").on("click", function () {
     response.Search.forEach(element => {
 
       console.log(element)
-      var newDiv = $("<div class='col-sm-6' style='padding:1rem; margin:auto'>");
+     // var newDiv = $("<div class='col-sm-6 addMovie' style='padding:1rem; margin:auto'>");
+      var newDiv = $("<div class='col-sm-6 addMovie'>");
 
-      var theDiv = $("<div>");
-
-      theDiv.addClass("addMovie");
+     // theDiv.addClass("addMovie");
 
 
       // Retrieves the Rating Data
@@ -37,13 +36,13 @@ $("#searchMovieBtn").on("click", function () {
 
       var titleH3 = $("<h3>")
 
-      theDiv.attr("title", titleInfo)
+      newDiv.attr("title", titleInfo)
 
-      theDiv.attr("omdbKey", omdbKey)
+      newDiv.attr("omdbKey", omdbKey)
 
       titleH3.html(titleInfo)
 
-      theDiv.append(titleH3);
+      newDiv.append(titleH3);
 
       var releaseYear = element.Year;
       // Creates an element to hold the release year
@@ -51,17 +50,19 @@ $("#searchMovieBtn").on("click", function () {
       // Displays the release year
       releaseYearP.html("Release year: " + releaseYear);
 
-      theDiv.append(releaseYearP);
+      newDiv.append(releaseYearP);
 
       var image = element.Poster;
       // Creates an element to hold the image
-      var imgElement = $("<img onerror='if (this.src == N/A') this.src = 'img/error.jpg'' height='300px width='250px'>");
+     // var imgElement = $("<img onerror='if (this.src == N/A') this.src = 'img/error.jpg'' height='300px width='250px'>");
+
+      var imgElement = $("<img onerror='if (this.src == N/A') this.src = 'img/error.jpg''>");
       //<img src="foo.jpg" onerror="if (this.src != 'error.jpg') this.src = 'error.jpg';">
       imgElement.attr("src", image);
       // Appends the image
-      theDiv.append(imgElement);
+      newDiv.append(imgElement);
       // Puts the entire Movie above the previous movies.
-      newDiv.append(theDiv);
+
       $("#movies-view").prepend(newDiv);
 
     })
@@ -83,7 +84,7 @@ $('body').on('click', '.addMovie', function () {
     var movieDiv = $("<div>")
 
     //movie title
-    var p = $("<p>")
+    var p = $("<h3>")
 
     p.html(response.Title)
 
@@ -96,17 +97,23 @@ $('body').on('click', '.addMovie', function () {
 
     movieDiv.append(p)
 
+    var imageDiv = $("<div>")
+
     var newImg = $("<img>")
 
     newImg.attr("src", response.Poster)
 
-    movieDiv.append(newImg)
+    imageDiv.append(newImg)
+
+    movieDiv.append(imageDiv)
 
 
     //the "claim it" button has all the data for the movies table"
     //
     //x title, loanStatus, loanerID, x plot,x poster, x actors, x omdbKey, x director
     var button = $("<button>")
+
+    button.addClass("btn btn-primary modalBtn ")
 
     button.html("Claim It")
 
@@ -127,6 +134,8 @@ $('body').on('click', '.addMovie', function () {
     movieDiv.append(button)
 
     button = $("<button>")
+
+    button.addClass("btn btn-danger modalBtn")
 
     button.html("Go Back")
 
@@ -151,12 +160,24 @@ $('body').on('click', '#claimMovie', function () {
     director: $(this).attr("director"),
     loanStatus: false
   }
-  console.log(data)
   $.ajax({
     type: "POST",
     url: "/api/movies",
     data: data,
-  });
+  }).then(function(){
+
+    $(".movieClicked").empty()
+    var h2 = $("<h2>")
+    h2.html("Congrats! " + data.title + " has been added to your collection")
+    $(".movieClicked").append(h2)
+    var button = $("<button>")
+    button.addClass("btn btn-danger")
+    button.attr("id", "closeModal")
+    button.html("Close Window")
+    $(".movieClicked").append(button)
+
+  }
+)
 
 })
 
