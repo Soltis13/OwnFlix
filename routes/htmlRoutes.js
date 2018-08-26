@@ -34,9 +34,22 @@ module.exports = function(app) {
           }
         }).then(function(ownedResult) {
           console.log(ownedResult);
+          console.log(borrowingResult);
+          let testData = {cats: 'good', kinds:[
+            {kind: 'black', name: 'steve'},
+            {kind: 'fat', name: 'john'},
+            {kind: 'black', name: 'sam'},
+          ]}
+          let ownedResultHB = [];
+          for (let i = 0; i < ownedResult.length; i++) {
+            ownedResultHB.push(ownedResult[i].dataValues);
+          }
+          console.log('HERE : ')
+          console.log(ownedResultHB);
           res.render(
             "Dashboard",
-            {rented: borrowingResult, owned: ownedResult}
+            {rented: borrowingResult, owned: ownedResultHB}
+            // testData
             );
           });
       });
