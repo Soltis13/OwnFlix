@@ -9,8 +9,7 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
-      console.log(req.user); // this is the user cookie (key)
-      console.log(req.isAuthenticated()); // checking if we are authenticated will return boolean
+     
       // console.log("Hello - " + req.user.firstName);
       // this would display the logged in user's first name
       res.render("index", {

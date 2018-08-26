@@ -109,6 +109,13 @@ module.exports = function(app) {
     //let userParsed = JSON.parse(req.user);
    // console.log(req.body);
     //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
+
+    if(req.user.id){
+      var userid = req.user.id
+    }
+    else{
+      var userid = req.user.userId
+    }
     db.Movie.create({
       title: req.body.title,
       loanStatus: false,
@@ -117,7 +124,8 @@ module.exports = function(app) {
       poster: req.body.poster,
       actors: req.body.actors,
       director: req.body.director,
-      UserId: req.user.userId
+      UserId: userid
+      
     }).then(function(dbExample) {
       res.json(dbExample);
     });
