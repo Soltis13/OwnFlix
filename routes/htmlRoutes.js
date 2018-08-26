@@ -9,8 +9,7 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
-      console.log(req.user); // this is the user cookie (key)
-      console.log(req.isAuthenticated()); // checking if we are authenticated will return boolean
+     
       // console.log("Hello - " + req.user.firstName);
       // this would display the logged in user's first name
       res.render("index", {
@@ -46,10 +45,16 @@ module.exports = function(app) {
   });
 
   app.get("/movies/", function(req, res) {
-    userParsed = JSON.parse(req.user);
+    if(req.user.id){
+      var userid = req.user.id
+    }
+    else{
+      var userid = req.user.userId
+    }
+    // userParsed = JSON.parse(req.user);
     db.User.findOne({
       where: {
-        id: userParsed.id
+        id: userid
       }
     }).then(function(userData) {
       var hbsObject = {
@@ -60,9 +65,22 @@ module.exports = function(app) {
   });
 
   // added this route to test Dashboard on 8/24/2018
-  app.get("/Dashboard", function(req, res) {
-    userParsedID = JSON.parse(req.user);
-    if (req.user) {
+  app.get("/Dashboard", authenticationMiddleware(), function(req, res) {
+    // console.log("MORE STUFF: " + req.user)
+    console.log(req.user.userId)
+    // console.log(JSON.stringify(req.user));
+    if(req.user.id){
+      var userid = req.user.id
+    }
+    else{
+      var userid = req.user.userId
+    }
+    if (userid) {
+      // userParsedSession = req.session.passport.user
+      // userParsedID = req.user;
+      // console.log("this is the dasboard console log: " + req.user.id)
+    // console.log(req.user.id)
+      //console.log("STUFF: " + userParsedID.id + " " + userParsedSession.id + " " + res);
       // Searching for user movies they are borrowing currently
       db.Movie.findAll({
         attributes: [
@@ -77,7 +95,7 @@ module.exports = function(app) {
           "UserId"
         ],
         where: {
-          loanerID: userParsedID.id
+          loanerID: userid
         }
       }).then(function(borrowingResult) {
         db.Movie.findAll({
@@ -93,7 +111,7 @@ module.exports = function(app) {
             "UserId"
           ],
           where: {
-            UserID: userParsedID.id
+            UserID: userid
           }
         }).then(function(ownedResult) {
 
@@ -151,4 +169,15 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.render("404");
   });
+
+// Authentication middleware to test req/res call if user is auth
+function authenticationMiddleware() {  
+	return (req, res, next) => {
+		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+
+	    if (req.isAuthenticated()) return next();
+	    res.redirect('/')
+	}
+}
+
 };

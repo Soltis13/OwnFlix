@@ -26,22 +26,18 @@ module.exports = function(app) {
       res.json(dbExamples);
     });
   });
-  // Create a new example
-  //began working on a POST for a user
-  // app.post("/api/user", function(req, res) {
-  //   db.User.create({
-  //     firstName: req.body.firstName,
-  //     lastName: req.body.lastName,
-  //     email: req.body.email,
-  //     password: req.body.password,
-  //     address: req.body.address,
-  //     city: req.body.city,
-  //     state: req.body.state,
-  //     zip: req.body.zip
-  //   }).then(function(dbExample) {
-  //     res.json(dbExample);
-  //   });
-  // });
+  
+  app.get("/login", function(req, res, next){
+    console.log("you are logging in...")
+  })
+
+  // Login logic
+  app.post("/login", passport.authenticate(
+    "local", {
+      successRedirect: "/Dashboard",
+      failureRedirect: "/"
+    }
+  ));
 
   app.get("/register", function(req, res){
     console.log("you are on register")
@@ -82,7 +78,7 @@ module.exports = function(app) {
       }).then(function(userIDquery){
         var userID = userIDquery[0]
         console.log("USER ID: " + JSON.stringify(userID));
-        req.login(JSON.stringify(userID), function(error){
+        req.login(userID, function(error){
           res.redirect("/Dashboard")
         })
       })
@@ -106,12 +102,20 @@ module.exports = function(app) {
 
 
   app.post("/api/movies", function(req, res) {
-   console.log(req.user)
-   userParsed =  JSON.parse(req.user)
-  console.log("hopefully parsed the user JSON here: " + userParsed.id)
+  //  console.log(req.user)
+  //  userParsed =  JSON.parse(req.user)
+  // console.log("hopefully parsed the user JSON here: " + userParsed.id)
+
     //let userParsed = JSON.parse(req.user);
    // console.log(req.body);
     //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
+
+    if(req.user.id){
+      var userid = req.user.id
+    }
+    else{
+      var userid = req.user.userId
+    }
     db.Movie.create({
       title: req.body.title,
       loanStatus: false,
@@ -120,7 +124,8 @@ module.exports = function(app) {
       poster: req.body.poster,
       actors: req.body.actors,
       director: req.body.director,
-      UserId: userParsed.id
+      UserId: userid
+      
     }).then(function(dbExample) {
       res.json(dbExample);
     });
