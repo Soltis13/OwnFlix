@@ -1,13 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Movie = sequelize.define("Movie", {
-    movieEdition: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    mediaType: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -21,16 +14,43 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-
-    comments: {
+    loanerID: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    plot: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    poster: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    actors: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    omdbKey: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    condition: {
-      type: DataTypes.STRING,
+    director: {
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [1]
@@ -39,7 +59,9 @@ module.exports = function(sequelize, DataTypes) {
   });
   Movie.associate = function(models) {
     Movie.belongsTo(models.User, {
-      foreignKey: {}
+      foreignKey: {
+        allowNull: true
+      }
     });
   };
 

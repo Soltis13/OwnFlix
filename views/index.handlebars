@@ -1,19 +1,18 @@
-
-  <!--Header Div-->
-  <div class = "landing-header">
-      <!--logo and sign in button-->
-      <Div class="container">
-          <div class="row">
-              <div class="col-sm-2"><a class="navbar-brand text-dark"  href="landingPage.html"><p id="logo">OwnFlix</p></a></div>
-              <div class="col-sm-10" id="landing-header-view">
-                  <div class="row">
-                      <div class="col-sm-10"></div>
-                      <div class="col-sm-2 buttons"><button type="button" class="btn btn-default" id="sign-in">Sign In</button></div>
-                  </div>
-              </div>
-          </div>
-      </Div>
-  </div>
+<!--Header Div-->
+<div class = "landing-header">
+    <!--logo and sign in button-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"><a class="navbar-brand text-dark"  href="/"><p id="logo">OwnFlix</p></a></div>
+            <div class="col-sm-10" id="landing-header-view">
+                <div class="row">
+                    <div class="col-sm-10"></div>
+                    <div class="col-sm-2 buttons"><button type="button" class="btn btn-default hvr-bounce-in" id="sign-in">Sign In</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
   <!--Main Content Div-->
   <div class="container">
@@ -22,6 +21,7 @@
           <div class = "col-sm-12">
               <!--containers get put here-->
               <div id="login-view">
+                  <h1>{{title}}</h1>
                   <H1>See What's Next</H1>
                   <h1>{{title}}</h1>
                   {{#if errors}}
@@ -31,35 +31,39 @@
                   {{/if}}
                   <H3>Your next movie could be just up the street.</H3>
                   <div class="col-sm-2 buttons"><button type="button" class="btn btn-default" id="new-user">Create New User</button></div>
-              
-                  <div class="col-sm-12 jumbotron">
-                          <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                                  <div class="carousel-inner">
-                                      <div class="carousel-item active">
-                                      <img class="d-block w-100" src="" alt="First slide">
-                                      </div>
-                                      <div class="carousel-item">
-                                      <img class="d-block w-100" src="" alt="Second slide">
-                                      </div>
-                                      <div class="carousel-item">
-                                      <img class="d-block w-100" src="" alt="Third slide">
-                                      </div>
-                              </div>
-                          </div>
-                      </div>
-              </div>
-          </div>
-      </div>
-      
-          <!-- New User Modal Content -->
-        <div id='new-user-modal' class='modal'>
 
-          <div class='row' id='modal-content'>
-            <div class='col-sm-3'></div>
-             <div class='col-sm-6 sign-in-form'>
-               <span class="close">&times;</span>
+                <div class="col-sm-12 slideshow">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                            <img class="d-block w-100" src="img/slide1.jpg" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                            <img class="d-block w-100" src="img/slide2.jpg" alt="Second slide">
+                            </div>
+                            <div class="carousel-item">
+                            <img class="d-block w-100" src="img/slide3.jpg" alt="Third slide">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<!-- New User Modal Content -->
+<div id='new-user-modal' class='modal'>
+
+
+    <div class='row' id='modal-content'>
+        <div class='col-sm-3'></div>
+            <div class='col-sm-6 sign-in-form'>
+                <span class="close">&times;</span>
                 <h3>Create Account</h3>
-                <form id='create-account-form' name='new-user-form'>
+
+                <form id='create-account-form' name='new-user-form' action="/register" method="POST">
+
                 <br><label for="firstName">First Name</label><input name='firstName' type='text' id='firstName'>
                 <br>
                 <br>
@@ -85,17 +89,35 @@
                 <br>
                 <br>
                 <input type='submit' id='submit-new-user' value='Submit'>
-              </form>
-             </div>
-             <div class='col-sm-3'></div>
-          </div>
-        </div>
+                </form>
+            </div>
+        <div class='col-sm-3'></div>
+    </div>
+</div>
 
-        <!-- Sign In Modal -->
-        <div id='sign-in-modal' class='modal'>
-
-          <div class='row' id='modal-content'>
+<!-- Sign In Modal -->
+<div id='sign-in-modal' class='modal'>
+    <div class='row' id='modal-content'>
+        <div class='col-sm-4'></div>
+        
+        <div class='col-sm-4 sign-in-form'>
+            <span class="close">&times;</span>
+            <h3>Sign In</h3>
+            <br>
+            <form id='sign-in-form'>
+            <input type='text' id='user-email' placeholder='Email'>
+            <br>
+            <br>
+            <input type='password' id='user-password' placeholder='Password'>
+            <br>
+            <br>
+            <input type='submit' id='submit-sign-in' href='UserPage.html' value='Submit'>
+            </form>
+            <br>
+            <br>
+            <button id='new-user'>New? Sign up Now.</button>
             <div class='col-sm-4'></div>
+<<<<<<< HEAD
             <div class='col-sm-4 sign-in-form'>
               <span class="close">&times;</span>
                <h3>Sign In</h3>
@@ -114,7 +136,17 @@
                <button id='new-user'>New? Sign up Now.</button>
                <div class='col-sm-4'></div>
             </div>
+=======
+>>>>>>> 713f44a1c2fc87621d289167f54a720a34f9bc17
         </div>
-      </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+    <span style='font-size:0.75em; color:whitesmoke'><a href="https://github.com/Soltis13/GroupProject2">Created by J. Thor, T. Hawj, Z. Evanchak, and S. Soltis.</a>  //  Copyright 2018.  // 
+    <a href="https://www.themoviedb.org/">This product uses the TMDb API but is not endorsed or certified by TMDb.     <img href src="img/themoviedb.png" alt="TheMovieDB" height="22" width="22"></a></span>
+    </div>
+</footer>
 
 
