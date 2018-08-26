@@ -1,9 +1,14 @@
 var db = require("../models");
+require("dotenv").config();
+var omdb = require("../keys.js")
+var request = require("request")
 
-module.exports = function(app) {
+var apiKey = omdb.omdb.id
+
+module.exports = function (app) {
   // Load index page
-  app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+  app.get("/", function (req, res) {
+    db.Example.findAll({}).then(function (dbExamples) {
       console.log(req.user); // this is the user cookie (key)
       console.log(req.isAuthenticated()); // checking if we are authenticated will return boolean
       // console.log("Hello - " + req.user.firstName);
@@ -14,31 +19,81 @@ module.exports = function(app) {
       });
     });
   });
+  // added this route to test movies on 8/22/2018
+  app.get("/movies/search/:movie", function (req, res) {
 
-  app.get('/Dashboard', function(req, res) {
-    let userParse = JSON.parse(req.user);
-    console.log(userParse.id);
+    var queryURL =
+      "https://www.omdbapi.com/?s=" +
+      //NEED TO UPDATE MOVIE API PUBLIC JS TO HANDLE THIS 
+      req.params.movie +
+      "&y=&plot=short&type=movie&apikey=" + apiKey;
+    console.log(queryURL)
+
+    request(queryURL, function (error, response, body) {
+      console.log(body)
+      if (!error && response.statusCode === 200) {
+        res.json(body)
+        console.log("success")
+      }   
+    })
+  })
+
+  app.get("/movies/search/title/:id", function (req, res) {
+
+
+    var queryURL =
+      "https://www.omdbapi.com/?i=" +
+      req.params.id +
+      "&apikey=" + apiKey
+      request(queryURL, function (error, response, body) {
+        console.log(body)
+        if (!error && response.statusCode === 200) {
+          res.json(body)
+          console.log("success")
+        }
+      })
+
+
+  })
+  app.get("/movies/", function (req, res) {
+    userParsed =  JSON.parse(req.user)
+    db.User.findOne({
+      where: {
+        id: userParsed.id
+       
+      }
+    }).then(function (userData) {
+
+      var hbsObject = {
+        user: userData
+    }
+    res.render("movies", hbsObject);
+
+    });
+  })
+
+  // added this route to test Dashboard on 8/24/2018
+  app.get('/Dashboard', function (req, res) {
+    console.log(req.user);
     if (req.user) {
       // Searching for user movies they are borrowing currently
       db.Movie.findAll({
         attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
         where: {
-          loanerID: userParse.id,
-          loanStatus: true
+          loanerID: req.user
         }
-      }).then(function(borrowingResult) {
+      }).then(function (borrowingResult) {
         db.Movie.findAll({
           attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
           where: {
-            UserID: userParse.id
+            UserID: req.user
           }
-        }).then(function(ownedResult) {
-          console.log(ownedResult);
+        }).then(function (ownedResult) {
           res.render(
             "Dashboard",
-            {rented: borrowingResult, owned: ownedResult}
-            );
-          });
+            { rented: borrowingResult, owned: ownedResult }
+          );
+        });
       });
     }
     else {
@@ -46,20 +101,18 @@ module.exports = function(app) {
     }
   });
 
-  // added this route to test movies on 8/22/2018
-  app.get("/movies", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("movies", {
+  // added this route to test Search on 8/24/2018
+  app.get("/Search", function (req, res) {
+    db.Example.findAll({}).then(function (dbExamples) {
+      res.render("Search", {
         msg: "Welcome!",
         examples: dbExamples
       });
     });
   });
 
-
-
-  app.get("/movies/:user", function(req, res) {
-    db.Movie.findAll({}).then(function(dbExamples) {
+  app.get("/movies/:user", function (req, res) {
+    db.Movie.findAll({}).then(function (dbExamples) {
       res.render("movies", {
         msg: "Welcome!",
         examples: dbExamples
@@ -68,8 +121,8 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function() {
+  app.get("/example/:id", function (req, res) {
+    db.Example.findOne({ where: { id: req.params.id } }).then(function () {
       res.render("example", {
         example: dbExample
       });
@@ -77,7 +130,7 @@ module.exports = function(app) {
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };
