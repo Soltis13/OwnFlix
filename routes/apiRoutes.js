@@ -106,8 +106,9 @@ module.exports = function(app) {
 
 
   app.post("/api/movies", function(req, res) {
-    let userParsed = JSON.parse(req.user);
-    console.log(req.body);
+   
+    //let userParsed = JSON.parse(req.user);
+   // console.log(req.body);
     //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
     db.Movie.create({
       title: req.body.title,
@@ -116,8 +117,8 @@ module.exports = function(app) {
       plot: req.body.plot,
       poster: req.body.poster,
       actors: req.body.actors,
-      director: req.body.director,
-      UserId: userParsed.id
+      director: req.body.director
+      //UserId: userParsed.id
     }).then(function(dbExample) {
       res.json(dbExample);
     });
