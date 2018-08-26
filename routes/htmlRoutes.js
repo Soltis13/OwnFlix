@@ -60,8 +60,16 @@ module.exports = function(app) {
   // added this route to test Dashboard on 8/24/2018
   app.get("/Dashboard", function(req, res) {
     console.log(req.user);
+    
+    var userParsed =  JSON.parse(req.user)
+   
+    console.log("THIS MIGHT DO IT: " + userParsed.id)
+   // userParsed = parseInt(userParsed.id)
+
+
     if (req.user) {
       // Searching for user movies they are borrowing currently
+      console.log("first query on Dashboard");
       db.Movie.findAll({
         attributes: [
           "id",
@@ -75,9 +83,10 @@ module.exports = function(app) {
           "UserId"
         ],
         where: {
-          loanerID: req.user
+          loanerID: userParsed.id
         }
       }).then(function(borrowingResult) {
+        console.log("2nd query on Dashboard");
         db.Movie.findAll({
           attributes: [
             "id",
@@ -91,9 +100,10 @@ module.exports = function(app) {
             "UserId"
           ],
           where: {
-            UserID: req.user
+            UserID: userParsed.id
           }
         }).then(function(ownedResult) {
+          console.log("dashboard attempting to load");
           res.render("Dashboard", {
             rented: borrowingResult,
             owned: ownedResult
