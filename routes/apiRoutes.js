@@ -78,7 +78,7 @@ module.exports = function(app) {
       }).then(function(userIDquery){
         var userID = userIDquery[0]
         console.log("USER ID: " + JSON.stringify(userID));
-        req.login(JSON.stringify(userID), function(error){
+        req.login(userID, function(error){
           res.redirect("/Dashboard")
         })
       })
