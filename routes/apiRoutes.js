@@ -48,7 +48,7 @@ module.exports = function(app) {
 
   });
 
-  app.post("/api/register", function(req, res) {
+  app.post("/register", function(req, res) {
     req.checkBody("email", "Please use a valid email.").isEmail();
     req.checkBody("password", "Please use a valid email").notEmpty();
 

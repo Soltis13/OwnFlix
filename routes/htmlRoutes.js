@@ -61,7 +61,7 @@ module.exports = function(app) {
 
   // added this route to test Dashboard on 8/24/2018
   app.get("/Dashboard", function(req, res) {
-    console.log(req.user);
+    userParsedID = JSON.parse(req.user);
     if (req.user) {
       // Searching for user movies they are borrowing currently
       db.Movie.findAll({
@@ -77,7 +77,7 @@ module.exports = function(app) {
           "UserId"
         ],
         where: {
-          loanerID: req.user
+          loanerID: userParsedID.id
         }
       }).then(function(borrowingResult) {
         db.Movie.findAll({
@@ -93,17 +93,13 @@ module.exports = function(app) {
             "UserId"
           ],
           where: {
-            UserID: req.user
+            UserID: userParsedID.id
           }
         }).then(function(ownedResult) {
 
           console.log(ownedResult);
           console.log(borrowingResult);
-          let testData = {cats: 'good', kinds:[
-            {kind: 'black', name: 'steve'},
-            {kind: 'fat', name: 'john'},
-            {kind: 'black', name: 'sam'},
-          ]}
+
           let ownedResultHB = [];
           for (let i = 0; i < ownedResult.length; i++) {
             ownedResultHB.push(ownedResult[i].dataValues);
@@ -116,7 +112,7 @@ module.exports = function(app) {
             // testData
             );
           });
-        });
+    
       });
     } else {
       res.render("404");
