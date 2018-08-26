@@ -3,7 +3,8 @@ require("dotenv").config();
 var omdb = require("../keys.js")
 var request = require("request")
 
-var apiKey = omdb.omdb.id
+var apiKey = omdb.omdb.id;
+console.log()
 
 module.exports = function (app) {
   // Load index page
@@ -28,6 +29,7 @@ module.exports = function (app) {
       req.params.movie +
       "&y=&plot=short&type=movie&apikey=" + apiKey;
     console.log(queryURL)
+
 
     request(queryURL, function (error, response, body) {
       console.log(body)
