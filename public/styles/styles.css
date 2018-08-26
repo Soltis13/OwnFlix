@@ -100,12 +100,12 @@ body{
 #searchMovie, #rentMovie{
     width: 100%;
 }
-    text-align: center;
+    /* text-align: center;
     padding: 2em;
     color: rgb(8, 6, 6);
     background-color: rgba(187, 184, 184, 0.856);
-    text-shadow: 1px .5px .5px  rgba(48, 39, 39, 0.493)
-}
+    text-shadow: 1px .5px .5px  rgba(48, 39, 39, 0.493);
+} */
 
 /* New Account Page class new-user-view*/
 .sign-in-form{
@@ -116,11 +116,19 @@ body{
     float: left;
     width: 50%;
     height: auto;
-    color: black;
+    color: white;
     margin-top: 10%;
     text-align: center;
+    padding-bottom: 10%;
 }
 
 .addMovie:hover{
     background-color: #D72f2f;
+    color: black;
+    width: 50%;
+    border: 2px solid black;
+}
+
+.modalBtn {
+    margin: 2%;
 }
