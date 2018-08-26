@@ -56,11 +56,19 @@ module.exports = function (app) {
 
   })
   app.get("/movies/", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
-      res.render("movies", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
+    userParsed =  JSON.parse(req.user)
+    db.User.findOne({
+      where: {
+        id: userParsed.id
+       
+      }
+    }).then(function (userData) {
+
+      var hbsObject = {
+        user: userData
+    }
+    res.render("movies", hbsObject);
+
     });
   })
 

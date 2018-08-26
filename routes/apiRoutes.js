@@ -48,7 +48,7 @@ module.exports = function(app) {
 
   });
 
-  app.post("/register", function(req, res) {
+  app.post("/api/register", function(req, res) {
     req.checkBody("email", "Please use a valid email.").isEmail();
     req.checkBody("password", "Please use a valid email").notEmpty();
 
@@ -106,7 +106,9 @@ module.exports = function(app) {
 
 
   app.post("/api/movies", function(req, res) {
-   
+   console.log(req.user)
+   userParsed =  JSON.parse(req.user)
+  console.log("hopefully parsed the user JSON here: " + userParsed.id)
     //let userParsed = JSON.parse(req.user);
    // console.log(req.body);
     //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
@@ -117,8 +119,8 @@ module.exports = function(app) {
       plot: req.body.plot,
       poster: req.body.poster,
       actors: req.body.actors,
-      director: req.body.director
-      //UserId: userParsed.id
+      director: req.body.director,
+      UserId: userParsed.id
     }).then(function(dbExample) {
       res.json(dbExample);
     });

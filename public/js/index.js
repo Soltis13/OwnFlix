@@ -130,102 +130,99 @@ $(".close").on("click", function(e) {
   $(".modal").css("display", "none");
 });
 
-<<<<<<< HEAD
-=======
-// $('#submit-sign-in').on('click', function(e) {
-//   // post to sign-in verify api, which will redirect to /Dashboard hopefully
-//   e.preventDefault();
-//
-//   $.post('/api/verify-sign-in', {email: '', password: ''}).then(function(response) {
-//     console.log('verified');
-//   }).catch(function(e) {
-//     console.log('invalid login creds');
-//   })
-// })
+$('#submit-sign-in').on('click', function(e) {
+  // post to sign-in verify api, which will redirect to /Dashboard hopefully
+  e.preventDefault();
 
->>>>>>> 7a16ac57d3f7755918a523d6669cb89f9db24309
+  $.post('/api/verify-sign-in', {email: '', password: ''}).then(function(response) {
+    console.log('verified');
+  }).catch(function(e) {
+    console.log('invalid login creds');
+  })
+})
+
 // Validate login
 
 //
 
 // // Validate new user details
-// $('#submit-new-user').on('click', function(e) {
-//   // Validate form with jquery validate
-//   $("form[name='new-user-form']").validate({
-//     // Specify validation rules
-//     rules: {
-//       // The key name on the left side is the name attribute
-//       // of an input field. Validation rules are defined
-//       // on the right side
-//       firstName: "required",
-//       lastName: "required",
-//       email: {
-//         required: true,
-//         // Specify that email should be validated
-//         // by the built-in "email" rule
-//         email: true
-//       },
-//       password: {
-//         required: true,
-//         minlength: 8
-//       },
-//       address: {
-//         required: true
-//       },
-//       city: {
-//         required: true
-//       },
-//       state: {
-//         required: true,
-//         rangelength: [2,2]
-//       },
-//       zip: {
-//         required: true,
-//         rangelength: [5, 5]
-//       },
+$('#submit-new-user').on('click', function(e) {
+  // Validate form with jquery validate
+  $("form[name='new-user-form']").validate({
+    // Specify validation rules
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      firstName: "required",
+      lastName: "required",
+      email: {
+        required: true,
+        // Specify that email should be validated
+        // by the built-in "email" rule
+        email: true
+      },
+      password: {
+        required: true,
+        minlength: 8
+      },
+      address: {
+        required: true
+      },
+      city: {
+        required: true
+      },
+      state: {
+        required: true,
+        rangelength: [2,2]
+      },
+      zip: {
+        required: true,
+        rangelength: [5, 5]
+      },
 
-//     },
-//     // Specify validation error messages
-//     messages: {
-//       firstName: "Please enter your firstname",
-//       lastName: "Please enter your lastname",
-//       password: {
-//         required: "Please provide a password",
-//         minlength: "Your password must be at least 8 characters long"
-//       },
-//       email: "Please enter a valid email address",
-//       address: {
-//         required: "Please enter your street address"
-//       },
-//       city: {
-//         required: "Please enter your city"
-//       },
-//       state: {
-//         required: "Please enter your state's postal code i.e. MN",
-//         rangelength: "State Postal Code should be only 2 leters"
-//       },
-//       zip: {
-//         required: "Please enter your 5 digit zip code",
-//         rangelength: "Zip Code should 5 digits (ignore anything following a hyphen)"
-//       }
-//     },
-//     // Make sure the form is submitted to the destination defined
-//     // in the "action" attribute of the form when valid
-//     submitHandler: function(form) {
+    },
+    // Specify validation error messages
+    messages: {
+      firstName: "Please enter your firstname",
+      lastName: "Please enter your lastname",
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 8 characters long"
+      },
+      email: "Please enter a valid email address",
+      address: {
+        required: "Please enter your street address"
+      },
+      city: {
+        required: "Please enter your city"
+      },
+      state: {
+        required: "Please enter your state's postal code i.e. MN",
+        rangelength: "State Postal Code should be only 2 leters"
+      },
+      zip: {
+        required: "Please enter your 5 digit zip code",
+        rangelength: "Zip Code should 5 digits (ignore anything following a hyphen)"
+      }
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
 
-//       // Serialize form data
-//       let serialForm = $(form).serializeArray();
-//       let data = {};
-//       for (let i = 0; i < serialForm.length; i++){
-//         data[serialForm[i]['name']] = serialForm[i]['value'];
-//       }
-//       console.log(data);
-//       console.log("valid form");
+      // Serialize form data
+      let serialForm = $(form).serializeArray();
+      let data = {};
+      for (let i = 0; i < serialForm.length; i++){
+        data[serialForm[i]['name']] = serialForm[i]['value'];
+      }
+      console.log(data);
+      console.log("valid form");
 
-//       $.post('/api/user', data, function(r) {
-//         console.log(data)
-//         console.log("Woo posted");
-//       })
-//     }
-//   });
-// });
+      $.post('/api/register', data, function(r) {
+        console.log(data)
+        console.log("Woo posted");
+      })
+    }
+  });
+});
