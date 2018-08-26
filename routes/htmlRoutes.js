@@ -73,32 +73,34 @@ module.exports = function (app) {
   })
 
   // added this route to test Dashboard on 8/24/2018
-  app.get('/Dashboard', function (req, res) {
+  app.get('/dashboard', authenticationMiddleware(), function(req, res) {
     console.log(req.user);
-    if (req.user) {
-      // Searching for user movies they are borrowing currently
-      db.Movie.findAll({
-        attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
-        where: {
-          loanerID: req.user
-        }
-      }).then(function (borrowingResult) {
-        db.Movie.findAll({
-          attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
-          where: {
-            UserID: req.user
-          }
-        }).then(function (ownedResult) {
-          res.render(
-            "Dashboard",
-            { rented: borrowingResult, owned: ownedResult }
-          );
-        });
-      });
-    }
-    else {
-      res.render("404");
-    }
+    res.render("dashboard")
+
+    // if (req.user) {
+    //   // Searching for user movies they are borrowing currently
+    //   db.Movie.findAll({
+    //     attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
+    //     where: {
+    //       loanerID: req.user
+    //     }
+    //   }).then(function (borrowingResult) {
+    //     db.Movie.findAll({
+    //       attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
+    //       where: {
+    //         UserID: req.user
+    //       }
+    //     }).then(function (ownedResult) {
+    //       res.render(
+    //         "Dashboard",
+    //         { rented: borrowingResult, owned: ownedResult }
+    //       );
+    //     });
+    //   });
+    // }
+    // else {
+    //   res.render("404");
+    // }
   });
 
   // added this route to test Search on 8/24/2018
@@ -133,4 +135,15 @@ module.exports = function (app) {
   app.get("*", function (req, res) {
     res.render("404");
   });
+
+  // Authentication middleware to test req/res call if user is auth
+function authenticationMiddleware () {  
+	return (req, res, next) => {
+		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+
+	    if (req.isAuthenticated()) return next();
+	    res.redirect('/')
+	}
+}
+
 };

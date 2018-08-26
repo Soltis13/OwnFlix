@@ -43,12 +43,25 @@ module.exports = function(app) {
   //   });
   // });
 
-  app.get("/register", function(req, res){
+  app.get("/login", function(req, res, next){
+    console.log("you are logging in...")
+  })
+
+  // Login logic
+  app.post("/login", passport.authenticate(
+    "local", {
+      successRedirect: "/",
+      failureRedirect: "/"
+    }
+  ));
+
+
+  app.get("/register", function(req, res, next){
     console.log("you are on register")
 
   });
 
-  app.post("/api/register", function(req, res) {
+  app.post("/api/register", function(req, res, next) {
     req.checkBody("email", "Please use a valid email.").isEmail();
     req.checkBody("password", "Please use a valid email").notEmpty();
 
@@ -82,9 +95,10 @@ module.exports = function(app) {
       }).then(function(userIDquery){
         var userID = userIDquery[0]
         console.log("USER ID: " + JSON.stringify(userID));
-        req.login(JSON.stringify(userID), function(error){
-          res.redirect("/Dashboard")
-        })
+        req.login(userID, function(err) {
+          if (err) { return next(err); }
+          return res.redirect('/dashboard');
+        });
       })
     })
   });

@@ -11,6 +11,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var session = require("express-session");
+var MySQLStore = require('express-mysql-session')(session);
 var LocalStrategy = require("passport-local").Strategy;
 var bcrypt = require("bcrypt");
 var expressValidator = require("express-validator");
@@ -27,11 +28,23 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 var saltRounds = 10;
 
+// express-mysql-sessions settings
+var options = {
+  host: process.env.DB_HOST || "localhost",
+  port: 3306,
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "root",
+  database: process.env.DB_NAME || "ownflix"
+};
+
+var sessionStore = new MySQLStore(options);
+
 // Express-Session cookie config
 app.use(
   session({
     secret: "somestuffhere", //this is a salt
     resave: false,
+    store: sessionStore,
     saveUninitialized: false, //prevent cookie unless logged in
     cookie: { secure: false }
   })
@@ -48,13 +61,31 @@ app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// // Express-Session cookie config
-// app.use(session({
-//   secret: "somestuffhere", //this is a salt
-//   resave: false,
-//   saveUninitialized: false, //prevent cookie unless logged in
-//   cookie: {secure: false}
-// }));
+//Passport Local Strategey
+passport.use(new LocalStrategy(
+  {usernameField: "email"},
+  function(username, password, done) {
+    console.log(username);
+    console.log(password);
+    var db = require("./models")
+    // use sequelize to query... instead of raw query
+    db.query("SELECT id, user_password FROM users WHERE user_email = ?", [username], function(err, results, fields) {
+      if (err) {done(err)};
+      if (results.length === 0) {
+        done(null, false)
+      }
+      console.log(results[0].password.toString());
+      var hash = results[0].password.toString();
+      bcrypt.compare(password, hash, function(err, response) {
+        if (response === true) {
+          return done(null, {userID: results[0].id})
+        } else {
+          return done (null, false);
+        }
+      })
+    })
+  }
+));
 
 // Handlebars
 app.engine(

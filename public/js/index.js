@@ -130,16 +130,16 @@ $(".close").on("click", function(e) {
   $(".modal").css("display", "none");
 });
 
-$('#submit-sign-in').on('click', function(e) {
-  // post to sign-in verify api, which will redirect to /Dashboard hopefully
-  e.preventDefault();
+// $('#submit-sign-in').on('click', function(e) {
+//   // post to sign-in verify api, which will redirect to /Dashboard hopefully
+//   e.preventDefault();
 
-  $.post('/api/verify-sign-in', {email: '', password: ''}).then(function(response) {
-    console.log('verified');
-  }).catch(function(e) {
-    console.log('invalid login creds');
-  })
-})
+//   $.post('/api/verify-sign-in', {email: '', password: ''}).then(function(response) {
+//     console.log('verified');
+//   }).catch(function(e) {
+//     console.log('invalid login creds');
+//   })
+// })
 
 // Validate login
 
