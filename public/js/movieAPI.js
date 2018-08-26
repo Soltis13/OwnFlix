@@ -24,7 +24,7 @@ $("#searchMovieBtn").on("click", function () {
     response.Search.forEach(element => {
 
       console.log(element)
-      var newDiv = $("<div class='col-sm-4' style='padding:1rem; margin:auto'>");
+      var newDiv = $("<div class='col-sm-6' style='padding:1rem; margin:auto'>");
 
       var theDiv = $("<div>");
 
