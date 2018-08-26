@@ -7,9 +7,8 @@
                     <div class="col-sm-2"><a class="navbar-brand text-dark"  href="/"><p id="logo">OwnFlix</p></a></div>
                     <div class="col-sm-10" id="landing-header-view">
                         <div class="row">
-                            <div class="col-sm-8"></div>
-                            <div class="col-sm-2"><a class="navbar-brand text-dark hvr-bounce-in"  href="Dashboard" ><button type='button' class="btn btn-default" id="dashboard-button" style="color: whitesmoke">Dashboard</button></a></div>
-                            <div class="col-sm-2"><a class="navbar-brand text-dark hvr-bounce-in"  href="movies" ><button type='button' class="btn btn-default" id="user-page-button" style="color: whitesmoke">User</button></a></div>
+                            <div class="col-sm-12" style="display: inline;"><a class="navbar-brand text-dark hvr-bounce-in"  href="Dashboard" style="float: right;"><button type='button' class="btn btn-default" id="dashboard-button" style="color: whitesmoke">Dashboard</button></a>
+                            <a class="navbar-brand text-dark hvr-bounce-in"  href="movies" style="float: right;"><button type='button' class="btn btn-default" id="user-page-button" style="color: whitesmoke">User</button></a></div>
 
                         </div>
                     </div>
@@ -46,14 +45,17 @@
 								<div class = "col-sm-12" >
 										<!--containers get put here-->
 										<h3><u>Claimed/Owned</u></h3>
+										<div class="row">
 										{{#each owned}}
-
-												<img src={{this.poster}} />
+											<div class='col-sm-6 addMovie'>
 												<h2>{{this.title}}</h2>
+												<div><img src={{this.poster}} /></div>
 												<p>Loan Status : {{#if this.loanStatus}} <span>Lent Out</span>{{else}}<span>Not Lent Out</span>{{/if}}</p>
-
+												<p>Actors : {{this.actors}}</p>
+												<p>Director : {{this.director}}</p>
 											</div>
 										{{/each}}
+									</div>
 										<!-- <p>{{cats}}</p>
 										{{#each kinds}}
 										<p>{{this.kind}} {{this.name}}</p>
