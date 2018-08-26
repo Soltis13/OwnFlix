@@ -104,6 +104,17 @@ module.exports = function(app) {
           }
         }).then(function(ownedResult) {
           console.log("dashboard attempting to load");
+          console.log(ownedResult[0]);
+          console.log("-----------------------------------------------------")
+
+          console.log("-----------------------------------------------------")
+
+          console.log(ownedResult[0].title);
+          console.log(ownedResult[1].title);
+
+          console.log()
+         
+         
           res.render("Dashboard", {
             rented: borrowingResult,
             owned: ownedResult
