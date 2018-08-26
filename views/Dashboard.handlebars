@@ -46,14 +46,18 @@
 								<div class = "col-sm-12" >
 										<!--containers get put here-->
 										<h3><u>Claimed/Owned</u></h3>
-										{{#each ownedResult}}
-											<div class="owned-wrap" data-id={{ownedResult.id}}>
-												<img src={{ownedResult.poster}} />
-												<h2>{{ownedResult.title}}</h2>
-												<p>Loan Status : {{#if ownedResult.loanStatus}} <span>Lent Out</span>{{ else }}<span>Not Lent Out</span>{{/if}}</p>
+										{{#each owned}}
+
+												<img src={{this.poster}} />
+												<h2>{{this.title}}</h2>
+												<p>Loan Status : {{#if this.loanStatus}} <span>Lent Out</span>{{else}}<span>Not Lent Out</span>{{/if}}</p>
 
 											</div>
 										{{/each}}
+										<!-- <p>{{cats}}</p>
+										{{#each kinds}}
+										<p>{{this.kind}} {{this.name}}</p>
+										{{/each}} -->
 
 						</div>
 				</div>
