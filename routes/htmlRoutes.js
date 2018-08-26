@@ -1,4 +1,9 @@
 var db = require("../models");
+require("dotenv").config();
+var omdb = require("../keys.js");
+var request = require("request");
+
+var apiKey = omdb.omdb.id;
 
 module.exports = function(app) {
   // Load index page
@@ -14,25 +19,84 @@ module.exports = function(app) {
       });
     });
   });
+  // added this route to test movies on 8/22/2018
+  app.get("/movies/search/:movie", function(req, res) {
+    var queryURL =
+      "https://www.omdbapi.com/?s=" +
+      req.params.movie +
 
-  app.get('/Dashboard', function(req, res) {
-    let userParse = JSON.parse(req.user);
-    console.log(userParse.id);
+      "&y=&plot=short&type=movie&apikey=" +
+      apiKey;
+    request(queryURL, function(error, response, body) {
+
+      if (!error && response.statusCode === 200) {
+        res.json(body);
+      }
+    });
+  });
+
+  app.get("/movies/search/title/:id", function(req, res) {
+    var queryURL =
+      "https://www.omdbapi.com/?i=" + req.params.id + "&apikey=" + apiKey;
+    request(queryURL, function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+        res.json(body);
+      }
+    });
+  });
+
+  app.get("/movies/", function(req, res) {
+    userParsed = JSON.parse(req.user);
+    db.User.findOne({
+      where: {
+        id: userParsed.id
+      }
+    }).then(function(userData) {
+      var hbsObject = {
+        user: userData
+      };
+      res.render("movies", hbsObject);
+    });
+  });
+
+  // added this route to test Dashboard on 8/24/2018
+  app.get("/Dashboard", function(req, res) {
+    console.log(req.user);
     if (req.user) {
       // Searching for user movies they are borrowing currently
       db.Movie.findAll({
-        attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
+        attributes: [
+          "id",
+          "title",
+          "loanStatus",
+          "loanerID",
+          "plot",
+          "poster",
+          "actors",
+          "director",
+          "UserId"
+        ],
         where: {
-          loanerID: userParse.id,
-          loanStatus: true
+          loanerID: req.user
         }
       }).then(function(borrowingResult) {
         db.Movie.findAll({
-          attributes: ['id', 'title', 'loanStatus', 'loanerID', 'plot', 'poster', 'actors', 'director', 'UserId'],
+          attributes: [
+            "id",
+            "title",
+            "loanStatus",
+            "loanerID",
+            "plot",
+            "poster",
+            "actors",
+            "director",
+            "UserId"
+          ],
           where: {
-            UserID: userParse.id
+            UserID: req.user
           }
         }).then(function(ownedResult) {
+
           console.log(ownedResult);
           console.log(borrowingResult);
           let testData = {cats: 'good', kinds:[
@@ -52,24 +116,22 @@ module.exports = function(app) {
             // testData
             );
           });
+        });
       });
-    }
-    else {
+    } else {
       res.render("404");
     }
   });
 
-  // added this route to test movies on 8/22/2018
-  app.get("/movies", function(req, res) {
+  // added this route to test Search on 8/24/2018
+  app.get("/Search", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
-      res.render("movies", {
+      res.render("Search", {
         msg: "Welcome!",
         examples: dbExamples
       });
     });
   });
-
-
 
   app.get("/movies/:user", function(req, res) {
     db.Movie.findAll({}).then(function(dbExamples) {

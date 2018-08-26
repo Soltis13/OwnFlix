@@ -1,10 +1,10 @@
 <div class='userdash'>
     <!--Header Div-->
-    <div class = "landing-header">
+    <div class="landing-header">
         <!--logo and sign in button-->
         <div class="container ">
             <div class="row">
-                <div class="col-sm-2"><a class="navbar-brand text-dark"  href="landingPage.html"><p id="logo">OwnFlix</p></a></div>
+                <div class="col-sm-2"><a class="navbar-brand text-dark"  href="/"><p id="logo">OwnFlix</p></a></div>
                 <div class="col-sm-10" id="landing-header-view">
                     <div class="row">
                         <div class="col-sm-8"></div>
@@ -22,12 +22,17 @@
         <div class='jumbotron' id='userjumbotron' style='background-color: rgba(12, 9, 9, 0.6);'>
             <div class='row'>
                 <div class='col-sm-12'>
-                    <div><h3><u>User Information</u></h3></div>
+                    <div>
+                        <h3>
+                            <u>User Information</u>
+                        </h3>
+                    </div>
                     <div class='row'>
                         <div class='col-sm-12'>
                             <!--populate user account data here or reference-->
                             <div id='user-data'>User Data</div>
-                        </div>
+                           <p> {{user.firstName}} {{user.lastName}} </p>
+                           <p>Address: {{user.address}} , {{user.city}}, {{user.state}}, {{user.zip}} </p>
                     </div>
                     <div class='row'>
                         <div class='col-sm-12'>
@@ -40,13 +45,19 @@
         </div>
     </div>
 
-    <!--User movies owned--><!--Search movie db for owner ID--><!--update page with table of content-->
+    <!--User movies owned-->
+    <!--Search movie db for owner ID-->
+    <!--update page with table of content-->
     <!--location for search bar and results-->
     <div class='container usercontainer'>
         <div class='jumbotron userjumbotron' style='background-color: rgba(12, 9, 9, 0.6);'>
             <div class='row'>
                 <div class='col-sm-12'>
-                    <div><h3><u>Add Your Movies Here</u></h3></div>
+                    <div>
+                        <h3>
+                            <u>Add Your Movies Here</u>
+                        </h3>
+                    </div>
                     <form id="addButtonForm">
                         <label for="searchMovie">Search Movies</label>
                         <input type="text" id="searchMovie">
@@ -55,20 +66,24 @@
                         <input class="btn btn-info" id="searchMovieBtn" type="submit" value="Search a Movie">
                     </form>
                     
-                    <div id ="movies-view"></div>
+                    
                         
                     <!-- Sign In Modal -->
-                    <div id='movieSelectedModal' class='modal'>
 
-                        <div class='row' id='modal-content'>
-                            <div class='col-sm-4'></div>
-                            <div class='col-sm-4 movieClicked sign-in-form'>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+               
             </div>
+            
+             <div class='row' id ="movies-view" style='margin:auto'></div>
         </div>
     </div>
-    
-</div> 
+
+</div>
+<div id='movieSelectedModal' class='modal'>
+
+    <div class='row' id='modal-content'>
+        <div class='col-sm-4'></div>
+        <div class='col-sm-4 movieClicked sign-in-form'>
+        </div>
+    </div>
+</div>

@@ -1,32 +1,32 @@
-//
+
 //
 
 $("#searchMovieBtn").on("click", function () {
+  $("#movies-view").empty()
   console.log("clicked")
   event.preventDefault();
+  $("#movies-view").empty()
+  console.log("clicked")
+
   var movieToSearch = $("#searchMovie")
     .val()
     .trim();
-
-  var queryURL =
-    "https://www.omdbapi.com/?s=" +
-    movieToSearch +
-    "&y=&plot=short&apikey=trilogy";
-
-  // Creates AJAX call for the specific movie button being clicked
   $.ajax({
-    url: queryURL,
+
+    url: "movies/search/" + movieToSearch,
     method: "GET"
+
   }).then(function (response) {
+    var response = JSON.parse(response)
     // Creates a div to hold the movie
-    console.log(response)
+  
     response.Search.forEach(element => {
 
       console.log(element)
-      var newDiv = $("<div>");
+     // var newDiv = $("<div class='col-sm-6 addMovie' style='padding:1rem; margin:auto'>");
+      var newDiv = $("<div class='col-sm-6 addMovie'>");
 
-      newDiv.addClass("addMovie")
-
+     // theDiv.addClass("addMovie");
 
 
       // Retrieves the Rating Data
@@ -34,15 +34,15 @@ $("#searchMovieBtn").on("click", function () {
 
       var omdbKey = element.imdbID
 
-      var titleH2 = $("<h2>")
+      var titleH3 = $("<h3>")
 
       newDiv.attr("title", titleInfo)
 
       newDiv.attr("omdbKey", omdbKey)
 
-      titleH2.html(titleInfo)
+      titleH3.html(titleInfo)
 
-      newDiv.append(titleH2);
+      newDiv.append(titleH3);
 
       var releaseYear = element.Year;
       // Creates an element to hold the release year
@@ -54,7 +54,10 @@ $("#searchMovieBtn").on("click", function () {
 
       var image = element.Poster;
       // Creates an element to hold the image
-      var imgElement = $("<img>");
+     // var imgElement = $("<img onerror='if (this.src == N/A') this.src = 'img/error.jpg'' height='300px width='250px'>");
+
+      var imgElement = $("<img onerror='if (this.src == N/A') this.src = 'img/error.jpg''>");
+      //<img src="foo.jpg" onerror="if (this.src != 'error.jpg') this.src = 'error.jpg';">
       imgElement.attr("src", image);
       // Appends the image
       newDiv.append(imgElement);
@@ -69,30 +72,19 @@ $("#searchMovieBtn").on("click", function () {
 $('body').on('click', '.addMovie', function () {
 
   event.preventDefault();
+  var omdbID = $(this).attr("omdbKey")
 
-  var queryURL =
-    "https://www.omdbapi.com/?i=" +
-    $(this).attr("omdbKey") +
-    "&apikey=trilogy";
-
-    console.log(queryURL)
-      // Creates AJAX call for the specific movie button being clicked
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function (response) {
-
-
-
-
-    //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
-
-    
-    console.log(response)
+  
+  // Creates AJAX call for the specific movie button being clicked
+  $.ajax({
+    url: "/movies/search/title/" + omdbID,
+    method: "GET"
+  }).then(function (response) {
+    var response = JSON.parse(response)
     var movieDiv = $("<div>")
 
     //movie title
-    var p = $("<p>")
+    var p = $("<h3>")
 
     p.html(response.Title)
 
@@ -105,17 +97,23 @@ $('body').on('click', '.addMovie', function () {
 
     movieDiv.append(p)
 
+    var imageDiv = $("<div>")
+
     var newImg = $("<img>")
 
     newImg.attr("src", response.Poster)
 
-    movieDiv.append(newImg)
+    imageDiv.append(newImg)
+
+    movieDiv.append(imageDiv)
 
 
     //the "claim it" button has all the data for the movies table"
     //
     //x title, loanStatus, loanerID, x plot,x poster, x actors, x omdbKey, x director
     var button = $("<button>")
+
+    button.addClass("btn btn-primary modalBtn ")
 
     button.html("Claim It")
 
@@ -137,7 +135,11 @@ $('body').on('click', '.addMovie', function () {
 
     button = $("<button>")
 
+    button.addClass("btn btn-danger modalBtn")
+
     button.html("Go Back")
+
+    button.attr("id", "closeModal")
 
     movieDiv.append(button)
 
@@ -148,21 +150,40 @@ $('body').on('click', '.addMovie', function () {
 
 $('body').on('click', '#claimMovie', function () {
 
-    //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
+  //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
   var data = {
     title: $(this).attr("title"),
-    omdbKey:  $(this).attr("keyID"),
+    omdbKey: $(this).attr("keyID"),
     plot: $(this).attr("plot"),
-    poster:  $(this).attr("poster"),
+    poster: $(this).attr("poster"),
     actors: $(this).attr("actors"),
     director: $(this).attr("director"),
     loanStatus: false
   }
-  console.log(data)
   $.ajax({
     type: "POST",
     url: "/api/movies",
     data: data,
-  });
+  }).then(function(){
+
+    $(".movieClicked").empty()
+    var h2 = $("<h2>")
+    h2.html("Congrats! " + data.title + " has been added to your collection")
+    $(".movieClicked").append(h2)
+    var button = $("<button>")
+    button.addClass("btn btn-danger")
+    button.attr("id", "closeModal")
+    button.html("Close Window")
+    $(".movieClicked").append(button)
+
+  }
+)
+
+})
+
+$('body').on('click', '#closeModal', function () {
+  $('.modal').css('display', 'none');
+  $(".movieClicked").empty()
+
 
 })

@@ -5,6 +5,8 @@
 // *** Dependencies
 // =============================================================
 require("dotenv").config();
+var omdb = require("./keys")
+var request = require("request")
 var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
@@ -14,10 +16,10 @@ var bcrypt = require("bcrypt");
 var expressValidator = require("express-validator");
 var Sequelize = require("sequelize");
 var passport = require("passport");
-var client = require("./keys.js");
-var Moviedb = require("moviedb");
-var OmdbApi = require('omdb-client');
-
+//var client = require("./keys.js");
+// var Moviedb = require("moviedb");
+//var OmdbApi = require('omdb-client');
+// var OmdbApi = require('omdb')
 
 // Sets up the Express App
 // =============================================================
@@ -26,12 +28,14 @@ var PORT = process.env.PORT || 3000;
 var saltRounds = 10;
 
 // Express-Session cookie config
-app.use(session({
-  secret: "somestuffhere", //this is a salt
-  resave: false,
-  saveUninitialized: false, //prevent cookie unless logged in
-  cookie: {secure: false}
-}));
+app.use(
+  session({
+    secret: "somestuffhere", //this is a salt
+    resave: false,
+    saveUninitialized: false, //prevent cookie unless logged in
+    cookie: { secure: false }
+  })
+);
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -68,8 +72,8 @@ require("./routes/htmlRoutes")(app);
 var syncOptions = { force: false }; 
 
 //access the keys
-var clientmoviedb = new Moviedb(client.moviedb);
-//var clientomdb= new OmdbApi(client.omdb);
+// var clientmoviedb = new Moviedb(client.moviedb);
+// var clientomdb=  new OmdbApi(client.omdb);
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
