@@ -68,7 +68,7 @@ module.exports = function(app) {
   // added this route to test Dashboard on 8/24/2018
   app.get("/Dashboard", authenticationMiddleware(), function(req, res) {
     // console.log("MORE STUFF: " + req.user)
-    // console.log(req.user.userId)
+    console.log(req.user.userId)
     // console.log(JSON.stringify(req.user));
     if(req.user.id){
       var userid = req.user.id
@@ -172,7 +172,7 @@ module.exports = function(app) {
   });
 
 // Authentication middleware to test req/res call if user is auth
-function authenticationMiddleware () {  
+function authenticationMiddleware() {  
 	return (req, res, next) => {
 		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
 
