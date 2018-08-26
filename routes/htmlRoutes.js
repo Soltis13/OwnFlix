@@ -24,9 +24,11 @@ module.exports = function(app) {
     var queryURL =
       "https://www.omdbapi.com/?s=" +
       req.params.movie +
+
       "&y=&plot=short&type=movie&apikey=" +
       apiKey;
     request(queryURL, function(error, response, body) {
+
       if (!error && response.statusCode === 200) {
         res.json(body);
       }
