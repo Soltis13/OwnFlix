@@ -29,11 +29,13 @@ Demonstration of an online website to coordinate DVD sharing similar to the "Lit
 ### API Considerations   
 Movie information is provided through themoviedb API.  https://developers.themoviedb.org/3/getting-started/introduction   
 
-### Libraries   
+### Notable Libraries   
 Express   
 Body-parser   
 Express-handlebars  
-
+Sequalize  
+bcrypt  
+passport  
 
 ### Design Process   
 Human-centered design is motivated by creating solutions for problems and opportunities through a focus on the needs, contexts, behaviors, and emotions of the people that the solutions will serve.   
