@@ -48,35 +48,6 @@ app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// Passport.js login verification
-passport.use(new LocalStrategy(
-  {usernameField: "email"},
-  function(username, password, done) {
-    console.log(username);
-    console.log(password);
-    // use sequelize to query... instead of raw query
-    db.User.findAll({
-      limit: 1,
-      where: {
-        email: username
-      }
-    }).then(function(results){
-    console.log(results)
-    var hash = results[0].password;
-    console.log(hash);
-    console.log(password);
-    bcrypt.compare(password, hash, function(err, res) {
-      if (res === true) {
-        return done(null, {userId: results[0].id});
-      } else {
-        return done(null, false);
-      }
-    })
-    })
-  }
-));
-
 // // Express-Session cookie config
 // app.use(session({
 //   secret: "somestuffhere", //this is a salt
@@ -84,7 +55,6 @@ passport.use(new LocalStrategy(
 //   saveUninitialized: false, //prevent cookie unless logged in
 //   cookie: {secure: false}
 // }));
-
 
 // Handlebars
 app.engine(
