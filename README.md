@@ -42,6 +42,8 @@ Human-centered design is motivated by creating solutions for problems and opport
 
 Further Design decisions and processes can be found in the wiki page Design.   
 
+[Class Presentation](https://docs.google.com/presentation/d/1GEir_pKkbQUK-pGXMEqNVUAe1Sdx8_D2BXy6rDzUIs0/edit?usp=sharing)
+
 
 ## License   
 	Ownflix was created for demonstration purposes only as part of the University of Minnesota's Web Development Bootcamp Course and not intended for commercial use.     
