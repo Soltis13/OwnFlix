@@ -37,6 +37,18 @@ var options = {
   database: process.env.DB_NAME || "ownflix"
 };
 
+// if (process.env.JAWSDB_URL) {
+//   options = mysql.createConnection(process.env.JAWSDB_URL);
+// } else {
+//   options = mysql.createConnection({
+//     port: 3306,
+//     host: "localhost",
+//     user: "root",
+//     password: "root",
+//     database: "ownflix"
+//   });
+// }
+
 var sessionStore = new MySQLStore(options);
 
 // Express-Session cookie config

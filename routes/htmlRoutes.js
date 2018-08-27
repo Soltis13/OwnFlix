@@ -8,6 +8,7 @@ var apiKey = omdb.omdb.id;
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
+    console.log(process.env.JAWSDB_URL)
     db.Example.findAll({}).then(function(dbExamples) {
       console.log(req.user); // this is the user cookie (key)
       console.log(req.isAuthenticated()); // checking if we are authenticated will return boolean
