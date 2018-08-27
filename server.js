@@ -11,7 +11,6 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var session = require("express-session");
-var MySQLStore = require('express-mysql-session')(session);
 var LocalStrategy = require("passport-local").Strategy;
 var bcrypt = require("bcrypt");
 var expressValidator = require("express-validator");
@@ -28,23 +27,11 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 var saltRounds = 10;
 
-// express-mysql-sessions settings
-var options = {
-  host: process.env.DB_HOST || "localhost",
-  port: 3306,
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "root",
-  database: process.env.DB_NAME || "ownflix"
-};
-
-var sessionStore = new MySQLStore(options);
-
 // Express-Session cookie config
 app.use(
   session({
     secret: "somestuffhere", //this is a salt
     resave: false,
-    store: sessionStore,
     saveUninitialized: false, //prevent cookie unless logged in
     cookie: { secure: false }
   })
@@ -60,6 +47,7 @@ app.use(expressValidator());
 app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // Passport.js login verification
 passport.use(new LocalStrategy(
@@ -88,6 +76,15 @@ passport.use(new LocalStrategy(
     })
   }
 ));
+
+// // Express-Session cookie config
+// app.use(session({
+//   secret: "somestuffhere", //this is a salt
+//   resave: false,
+//   saveUninitialized: false, //prevent cookie unless logged in
+//   cookie: {secure: false}
+// }));
+
 
 // Handlebars
 app.engine(
