@@ -89,29 +89,6 @@ passport.use(new LocalStrategy(
   }
 ));
 
-// db.User.findAll({
-//   limit: 1,
-//   where: {
-//     email: email
-//   },
-//   order: [["createdAt", "DESC"]]
-// }).then(function(results){
-// console.log(userInfo)
-// if (err) {done(err)};
-// if (results.length === 0) {
-//   done(null, false)
-// }
-// console.log(results[0].password.toString());
-// var hash = results[0].password.toString();
-// bcrypt.compare(password, hash, function(err, response) {
-//   if (response === true) {
-//     return done(null, {userID: results[0].id})
-//   } else {
-//     return done (null, false);
-//   }
-// })
-// })
-
 // Handlebars
 app.engine(
   "handlebars",

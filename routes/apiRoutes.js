@@ -45,6 +45,7 @@ module.exports = function(app) {
   });
 
   app.post("/register", function(req, res) {
+    console.log("Registering...")
     req.checkBody("email", "Please use a valid email.").isEmail();
     req.checkBody("password", "Please use a valid email").notEmpty();
 
@@ -77,7 +78,6 @@ module.exports = function(app) {
         order: [["createdAt", "DESC"]]
       }).then(function(userIDquery){
         var userID = userIDquery[0]
-        console.log("USER ID: " + JSON.stringify(userID));
         req.login(userID, function(error){
           res.redirect("/Dashboard")
         })
@@ -102,13 +102,14 @@ module.exports = function(app) {
 
 
   app.post("/api/movies", function(req, res) {
-  //  console.log(req.user)
-  //  userParsed =  JSON.parse(req.user)
-  // console.log("hopefully parsed the user JSON here: " + userParsed.id)
-
-    //let userParsed = JSON.parse(req.user);
-   // console.log(req.body);
-    //title, loanStatus, loanerID, plot, poster, actors, omdbKey, director
+ 
+    if(req.user.id){
+      var userid = req.user.id
+    }
+    else{
+      var userid = req.user.userId
+    }
+    
     db.Movie.create({
       title: req.body.title,
       loanStatus: false,
@@ -117,7 +118,7 @@ module.exports = function(app) {
       poster: req.body.poster,
       actors: req.body.actors,
       director: req.body.director,
-      UserId: req.user.userId
+      UserId: userid
     }).then(function(dbExample) {
       res.json(dbExample);
     });
