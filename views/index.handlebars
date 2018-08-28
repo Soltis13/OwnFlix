@@ -82,7 +82,7 @@
                 <label for="password">Password</label><input type='password' id='password' name='password'>
                 <br>
                 <br>
-                <input type='submit' id='submit-new-user' value='Submit'>
+                <input type='submit' id='submit-new-user' href="#" value='Submit'>
                 </form>
             </div>
         <div class='col-sm-3'></div>
@@ -98,14 +98,14 @@
             <span class="close">&times;</span>
             <h3>Sign In</h3>
             <br>
-            <form id='sign-in-form'>
-            <input type='text' id='user-email' placeholder='Email'>
+            <form id='sign-in-form' action="/login" method="POST">
+            <input type='text' id='user-email' placeholder='Email' name="email">
             <br>
             <br>
-            <input type='password' id='user-password' placeholder='Password'>
+            <input type='password' id='user-password' placeholder='Password' name="password">
             <br>
             <br>
-            <input type='submit' id='submit-sign-in' href='UserPage.html' value='Submit'>
+            <input type='submit' id='submit-sign-in' href='#' value='Submit'>
             </form>
             <br>
             <br>
