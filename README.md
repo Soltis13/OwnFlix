@@ -5,8 +5,8 @@
 For prerequisites and detailed instructions please read the
 [Installation Instructions](https://github.com/Soltis13/GroupProject2/wiki/Installation-Instructions)
 on the Wiki.    
-
-[Heroku Hosted Website](https://ownflixbootcamp1.herokuapp.com/)
+[Heroku Hosted Webstie](https://ownflix-th.herokuapp.com/)
+[Backup](https://ownflixbootcamp1.herokuapp.com/)
 
 ## Introduction    
 
